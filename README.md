@@ -1,1 +1,2 @@
-# ke-t5
+# ke-t5: Korean-English T5
+
