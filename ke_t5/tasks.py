@@ -352,32 +352,67 @@ t5.data.MixtureRegistry.add(
     "ke_t5_glue_v002_proportional",
     _glue_tasks_with_weight)
 
+t5.data.MixtureRegistry.add(
+    "ke_t5_glue_v002_equal",
+    [k for k, v in _glue_tasks_with_weight],
+    default_rate=1.0)
+
 # ============================== Super GLUE Mixture =================================
 t5.data.MixtureRegistry.add(
     "ke_t5_super_glue_v102_proportional",
     _super_glue_tasks_with_weight)
+
+t5.data.MixtureRegistry.add(
+    "ke_t5_super_glue_v102_equal",
+    [k for k, v in _super_glue_tasks_with_weight],
+    default_rate=1.0)
 
 # ========================== Korean Text Classification Mixture =============================
 t5.data.MixtureRegistry.add(
     "ke_t5_ko_text_classification_proportional",
     [(t, ke_t5.proc_utils.dedupe(t)) for t in _ko_text_classification])
 
+t5.data.MixtureRegistry.add(
+    "ke_t5_ko_text_classification_equal",
+    _ko_text_classification,
+    default_rate=1.0)
+
 # ========================== Ko En Summary Mixture =============================
 t5.data.MixtureRegistry.add(
     "ke_t5_ko_en_summary_proportional",
     [(t, ke_t5.proc_utils.dedupe(t)) for t in ["ke_t5_cnn_dailymail_v002", "ke_t5_nikl_summarization"]])
+
+t5.data.MixtureRegistry.add(
+    "ke_t5_ko_en_summary_equal",
+    ["ke_t5_cnn_dailymail_v002", "ke_t5_nikl_summarization"],
+    default_rate=1.0)
 
 # ========================== Ko En QA Mixture =============================
 t5.data.MixtureRegistry.add(
     "ke_t5_ko_en_qa_proportional",
     [(t, ke_t5.proc_utils.dedupe(t)) for t in ["ke_t5_korquad_allanswers", "ke_t5_squad_v010_allanswers", "ke_t5_trivia_qa_v010"]])
 
+t5.data.MixtureRegistry.add(
+    "ke_t5_ko_en_qa_equal",
+    ["ke_t5_korquad_allanswers", "ke_t5_squad_v010_allanswers", "ke_t5_trivia_qa_v010"],
+    default_rate=1.0)
+
 # ========================== Ko En Translation Mixture =============================
 t5.data.MixtureRegistry.add(
     "ke_t5_ko_translation_proportional",
     [(t, ke_t5.proc_utils.dedupe(t)) for t in ["ke_t5_ted_multi_en_ko", "ke_t5_ted_multi_ko_en"]])
 
+t5.data.MixtureRegistry.add(
+    "ke_t5_ko_translation_equal",
+    ["ke_t5_ted_multi_en_ko", "ke_t5_ted_multi_ko_en"],
+    default_rate=1.0)
+
 # ============================== All tasks Mixture =================================
 t5.data.MixtureRegistry.add(
     "ke_t5_all_proportional",
     [(t, ke_t5.proc_utils.dedupe(t)) for t in _all_tasks])
+
+t5.data.MixtureRegistry.add(
+    "ke_t5_all_equal",
+    _all_tasks,
+    default_rate=1.0)
