@@ -11,16 +11,12 @@ import t5.data
 from t5.evaluation import metrics
 import tensorflow_datasets as tfds
 
-
-DEFAULT_SPM_PATH = "gs://ket5/vocabs/ket5.64000/sentencepiece.model"
-DEFAULT_EXTRA_IDS = 100
+from ke_t5.default_vocab import DEFAULT_VOCAB
 
 DEFAULT_TEMPERATURE = 1.0 / 0.3
 DEFAULT_MIX_RATE = functools.partial(
     t5.data.rate_num_examples, temperature=DEFAULT_TEMPERATURE)
 
-DEFAULT_VOCAB = t5.data.SentencePieceVocabulary(
-    DEFAULT_SPM_PATH, DEFAULT_EXTRA_IDS)
 DEFAULT_OUTPUT_FEATURES = {
     "inputs": t5.data.Feature(
         vocabulary=DEFAULT_VOCAB, add_eos=True, required=False),
@@ -208,6 +204,7 @@ t5.data.TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     splits=["validation", "test"])
 
+from proc_utils import get_glue_postprocess_fn
 # ============================== GLUE ===============================
 for b in tfds.text.glue.Glue.builder_configs.values():
     t5.data.TaskRegistry.add(
@@ -217,7 +214,7 @@ for b in tfds.text.glue.Glue.builder_configs.values():
         text_preprocessor=t5.data.glue_utils.get_glue_text_preprocessor(b),
         metric_fns=t5.data.glue_utils.get_glue_metric(b.name),
         output_features=DEFAULT_OUTPUT_FEATURES,
-        postprocess_fn=t5.data.glue_utils.get_glue_postprocess_fn(b),
+        postprocess_fn=get_glue_postprocess_fn(b),
         splits=["test"] if b.name == "ax" else None,
     )
 
@@ -247,7 +244,7 @@ for b in tfds.text.super_glue.SuperGlue.builder_configs.values():
       text_preprocessor=text_preprocessor,
       metric_fns=t5.data.glue_utils.get_super_glue_metric(b.name),
       output_features=DEFAULT_OUTPUT_FEATURES,
-      postprocess_fn=t5.data.glue_utils.get_glue_postprocess_fn(b),
+      postprocess_fn=get_glue_postprocess_fn(b),
       splits=["test"] if b.name in ["axb", "axg"] else None)
 
 # ======================== Definite Pronoun Resolution =========================

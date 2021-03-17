@@ -8,6 +8,70 @@ from t5.seqio.utils import map_over_dataset
 from t5.evaluation import metrics
 import t5.data.glue_utils
 
+import numpy as np
+
+from ke_t5.default_vocab import DEFAULT_VOCAB
+
+def ndarray2string(ndarray):
+    return DEFAULT_VOCAB._decode(ndarray.tolist())
+
+def check_string(string):
+    if isinstance(string, np.ndarray):
+        return ndarray2string(string)
+    elif isinstance(string, str):
+        return string
+    raise TypeError("string(must be str of ndarray): {}".format(string))
+
+def string_to_float(string, default=-1., **unused_kwargs):
+    string = check_string(string)
+    try:
+        return float(string)
+    except ValueError:
+        return default
+    except TypeError as e:
+        raise TypeError("TypeError - string: {}, type: {}".format(string, type(string)))
+
+
+def string_label_to_class_id(string_label, label_classes, default=-1, **unused_kwargs):
+    string_label = check_string(string_label)
+    if string_label in label_classes:
+        return label_classes.index(string_label)
+    else:
+        return default
+
+def multirc(string_label, example=None, is_target=False):
+  """Returns dict containing the class with the question index for grouping."""
+  res = {
+      "value":
+          string_label_to_class_id(
+              string_label, label_classes=("False", "True"), example=example)
+  }
+  # Add the group, if present, since the model outputs will not have it.
+  if is_target:
+    res["group"] = example["idx/question"]
+  return res
+
+
+def qa(answer, example=None, is_target=False):
+  """Returns answer, or all answers if the full example is provided."""
+  if is_target:
+    return [tf.compat.as_text(a) for a in example["answers"]]
+  return answer
+
+def get_glue_postprocess_fn(builder_config):
+    if builder_config.name == "stsb":
+        return string_to_float
+    elif builder_config.name == "multirc":
+        return multirc
+    elif builder_config.name == "record":
+        return qa
+    else:
+        return functools.partial(
+            string_label_to_class_id,
+            label_classes=builder_config.label_classes,
+        )
+
+
 _KO_NSMC_LABEL_CLASSES = ['negative', 'positive']
 _KO_NSMC_FEATURE_NAMES = ('sentence',)
 
@@ -132,7 +196,7 @@ def nikl_cola_preprocess_fn():
 
 def nikl_cola_postprocess_fn():
     return functools.partial(
-        postprocessors.string_label_to_class_id,
+        string_label_to_class_id,
         label_classes=_KO_COLA_LABEL_CLASSES)
 
 
@@ -151,10 +215,10 @@ def get_kor_copora_postprocess_fn(task_name):
         raise AssertionError(
             "can't find preprocess job for {0} in get_kor_copora_preprocess_fn!".format(task_name))
     if task_name == 'korsts':
-        return postprocessors.string_to_float
+        return string_to_float
     else:
         return functools.partial(
-            postprocessors.string_label_to_class_id,
+            string_label_to_class_id,
             label_classes=KOR_CORPORA_DICT[task_name]['label_names'],
         )
 
