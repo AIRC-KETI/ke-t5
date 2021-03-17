@@ -15,7 +15,7 @@ from ke_t5.default_vocab import DEFAULT_VOCAB
 def ndarray2string(ndarray):
     return DEFAULT_VOCAB._decode(ndarray.tolist())
 
-def check_string(string):
+def check_string(string, **unused_kwargs):
     if isinstance(string, np.ndarray):
         return ndarray2string(string)
     elif isinstance(string, str):

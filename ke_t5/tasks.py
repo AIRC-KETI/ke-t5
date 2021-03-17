@@ -161,6 +161,7 @@ t5.data.TaskRegistry.add(
     metric_fns=[metrics.squad],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
+from ke_t5.proc_utils import check_string
 # =================================== NIKL Summarization ====================================
 t5.data.TaskRegistry.add(
     "ke_t5_nikl_summarization",
@@ -169,6 +170,7 @@ t5.data.TaskRegistry.add(
     text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
                                         article_key="article",
                                         summary_key="highlights"),
+    postprocess_fn=check_string,
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
@@ -180,6 +182,7 @@ t5.data.TaskRegistry.add(
     text_preprocessor=functools.partial(_ted_multi_translate_preprocess,
                                         source_language="en",
                                         target_language="ko"),
+    postprocess_fn=check_string,
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
@@ -190,6 +193,7 @@ t5.data.TaskRegistry.add(
     text_preprocessor=functools.partial(_ted_multi_translate_preprocess,
                                         source_language="ko",
                                         target_language="en"),
+    postprocess_fn=check_string,
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
@@ -286,6 +290,7 @@ t5.data.TaskRegistry.add(
         t5.data.preprocessors.summarize,
         article_key="article",
         summary_key="highlights"),
+    postprocess_fn=check_string,
     metric_fns=[metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
