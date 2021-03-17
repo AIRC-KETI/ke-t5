@@ -228,7 +228,7 @@ _KOR_CORPORA_METRICS = collections.OrderedDict([
     ("qpair", [metrics.f1_score_with_invalid, metrics.accuracy]),
     ("kornli", [metrics.accuracy]),
     ("korsts", [metrics.pearson_corrcoef, metrics.spearman_corrcoef]),
-    ("khsd", [metrics.f1_score_with_invalid, metrics.accuracy]),
+    ("khsd", [metrics.accuracy]),
 ])
 
 
