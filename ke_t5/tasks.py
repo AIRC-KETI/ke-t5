@@ -204,7 +204,7 @@ t5.data.TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     splits=["validation", "test"])
 
-from proc_utils import get_glue_postprocess_fn
+from ke_t5.proc_utils import get_glue_postprocess_fn
 # ============================== GLUE ===============================
 for b in tfds.text.glue.Glue.builder_configs.values():
     t5.data.TaskRegistry.add(
