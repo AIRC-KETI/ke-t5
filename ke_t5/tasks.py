@@ -174,6 +174,28 @@ t5.data.TaskRegistry.add(
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
+t5.data.TaskRegistry.add(
+    "ke_t5_nikl_summarization_summary",
+    t5.data.TfdsTask,
+    tfds_name="nikl/summarization.v1.0.summary.split:1.0.0",
+    text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
+                                        article_key="article",
+                                        summary_key="highlights"),
+    postprocess_fn=check_string,
+    metric_fns=[metrics.bleu, metrics.rouge],
+    output_features=DEFAULT_OUTPUT_FEATURES)
+
+t5.data.TaskRegistry.add(
+    "ke_t5_nikl_summarization_topic",
+    t5.data.TfdsTask,
+    tfds_name="nikl/summarization.v1.0.topic.split:1.0.0",
+    text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
+                                        article_key="article",
+                                        summary_key="highlights"),
+    postprocess_fn=check_string,
+    metric_fns=[metrics.bleu, metrics.rouge],
+    output_features=DEFAULT_OUTPUT_FEATURES)
+
 # ============================== TED Open Translation project ===============================
 t5.data.TaskRegistry.add(
     "ke_t5_ted_multi_en_ko",

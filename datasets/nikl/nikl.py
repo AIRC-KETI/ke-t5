@@ -819,6 +819,30 @@ class Nikl(tfds.core.GeneratorBasedBuilder):
                 _DATASET_ROOT['newspaper.v1.0']+'/*.json']},
         ),
         NiklConfig(
+            name='summarization.v1.0.summary.split',
+            data_root=_DATASET_ROOT['summarization.v1.0'],
+            feature=_SUMMARIZATION_FEATURE,
+            data_sp_path={tfds.Split.TRAIN: ['*.json']},
+            reading_fn=functools.partial(_parsing_summary, summary_type=[
+                                         'summary_sentences']),
+            parsing_fn=lambda x:x,
+            additional_data_root={'doc_root': [
+                _DATASET_ROOT['newspaper.v1.0']+'/*.json']},
+            split_fn=_DEFAULT_DOWNSTREAMTASK_CORPUS_SPLIT,
+        ),
+        NiklConfig(
+            name='summarization.v1.0.topic.split',
+            data_root=_DATASET_ROOT['summarization.v1.0'],
+            feature=_SUMMARIZATION_FEATURE,
+            data_sp_path={tfds.Split.TRAIN: ['*.json']},
+            reading_fn=functools.partial(_parsing_summary, summary_type=[
+                                         'topic_sentences']),
+            parsing_fn=lambda x:x,
+            additional_data_root={'doc_root': [
+                _DATASET_ROOT['newspaper.v1.0']+'/*.json']},
+            split_fn=_DEFAULT_DOWNSTREAMTASK_CORPUS_SPLIT,
+        ),
+        NiklConfig(
             name='paraphrase.v1.0',
             data_root=_DATASET_ROOT['paraphrase.v1.0'],
             feature=_PARAPHRASE_FEATURE,
