@@ -71,6 +71,29 @@ def get_glue_postprocess_fn(builder_config):
             label_classes=builder_config.label_classes,
         )
 
+@map_over_dataset
+def summarize_split(x, article_key, summary_key, summary_type='summary'):
+  """Convert a summarization dataset to a text2text pair.
+
+  For example, say the dataset returns examples of this format:
+    {'article': <article>, 'highlights': <summary>}
+  If article_key = 'article', summary_key = 'highlights', then the outputs will
+  have the format:
+    {'inputs': 'summarize': <article>, 'targets': <summary>}
+
+  Args:
+    x: an example to process.
+    article_key: the feature key for the article to summarize.
+    summary_key: the feature key for the target summary.
+  Returns:
+    A preprocessed example with the format listed above.
+  """
+  strs_to_join = ['summarize_{}:'.format(summary_type), x[article_key]]
+  return {
+      'inputs': tf.strings.join(strs_to_join, separator=' '),
+      'targets': x[summary_key],
+  }
+
 
 _KO_NSMC_LABEL_CLASSES = ['negative', 'positive']
 _KO_NSMC_FEATURE_NAMES = ('sentence',)

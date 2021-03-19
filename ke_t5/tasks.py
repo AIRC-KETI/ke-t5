@@ -162,6 +162,7 @@ t5.data.TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES)
 
 from ke_t5.proc_utils import check_string
+from ke_t5.proc_utils import summarize_split
 # =================================== NIKL Summarization ====================================
 t5.data.TaskRegistry.add(
     "ke_t5_nikl_summarization",
@@ -178,9 +179,10 @@ t5.data.TaskRegistry.add(
     "ke_t5_nikl_summarization_summary",
     t5.data.TfdsTask,
     tfds_name="nikl/summarization.v1.0.summary.split:1.0.0",
-    text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
+    text_preprocessor=functools.partial(summarize_split,
                                         article_key="article",
-                                        summary_key="highlights"),
+                                        summary_key="highlights",
+                                        summary_type="summary"),
     postprocess_fn=check_string,
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
@@ -191,7 +193,8 @@ t5.data.TaskRegistry.add(
     tfds_name="nikl/summarization.v1.0.topic.split:1.0.0",
     text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
                                         article_key="article",
-                                        summary_key="highlights"),
+                                        summary_key="highlights",
+                                        summary_type="topic"),
     postprocess_fn=check_string,
     metric_fns=[metrics.bleu, metrics.rouge],
     output_features=DEFAULT_OUTPUT_FEATURES)
@@ -399,6 +402,12 @@ t5.data.MixtureRegistry.add(
 t5.data.MixtureRegistry.add(
     "ke_t5_ko_text_classification_equal",
     _ko_text_classification,
+    default_rate=1.0)
+
+# ========================== Ko Summary Mixture =============================
+t5.data.MixtureRegistry.add(
+    "ke_t5_nikl_summary_mixture_equal",
+    ["ke_t5_nikl_summarization_summary", "ke_t5_nikl_summarization_topic"],
     default_rate=1.0)
 
 # ========================== Ko En Summary Mixture =============================
