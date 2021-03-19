@@ -191,7 +191,7 @@ t5.data.TaskRegistry.add(
     "ke_t5_nikl_summarization_topic",
     t5.data.TfdsTask,
     tfds_name="nikl/summarization.v1.0.topic.split:1.0.0",
-    text_preprocessor=functools.partial(t5.data.preprocessors.summarize,
+    text_preprocessor=functools.partial(summarize_split,
                                         article_key="article",
                                         summary_key="highlights",
                                         summary_type="topic"),
