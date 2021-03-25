@@ -1,5 +1,10 @@
 # ke-t5: Korean-English T5
 
+<style>
+    pre, code {
+        white-space: pre-wrap;
+    }
+</style>
 
 ## Fine-tuning on downstream task
 
