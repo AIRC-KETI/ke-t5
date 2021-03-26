@@ -1138,7 +1138,7 @@ Downstream task들의 성능입니다. Mixture task들로 성능을 측정하였
 성능을 높이기 위해서는 mixture task가 아닌 개별 task로 학습을 진행하십시오. (예를 들어 NIKL CoLA의 경우 개별 task로 학습을 진행할 경우 튜닝을 하지 않아도 small model에서 약 20의 성능이 나옵니다.)
 
 
-Summarization과 Extractive QA의 경우 입력이 모델들의 최대 시퀀스 길이인 512를 넘을 수가 있습니다. 이 경우 넘는 부분을 그냥 버리고 학습과 성능측정을 진행했습니다. 즉, 요약의 경우 512 토큰이 넘는 부분의 경우 요약이 되지 않고, extractive QA의 question에 대한 정답이 512 토큰을 초과하는 부분에 존재하면 답을 찾을 수 없습니다. 이러한 경우를 처리하여 성능을 높이기 위해서는 직접 학습 프로그램을 만들어 사용하셔야 합니다. (e.g. Extractive QA의 경우, BERT에서처럼 document span으로 분리하여 해당 span에 정답이 있는지 없는지로 학습.)
+Summarization과 Extractive QA의 경우 입력이 모델들의 최대 시퀀스 길이인 512를 넘을 수가 있습니다. 이 경우 넘는 부분을 그냥 버리고 학습과 성능측정을 진행했습니다. 즉, 요약의 경우 512 토큰을 초과하는 부분은 요약이 되지 않고, extractive QA의 경우 question에 대한 정답이 512 토큰을 초과하는 부분에 존재하면 답을 찾을 수 없습니다. 이러한 경우를 처리하여 성능을 높이기 위해서는 직접 학습 프로그램을 만들어 사용하셔야 합니다. (e.g. Extractive QA의 경우, BERT에서처럼 document span으로 분리하여 해당 span에 정답이 있는지 없는지로 학습.)
 
 
 ### Korean
