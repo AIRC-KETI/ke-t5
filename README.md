@@ -245,7 +245,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <th>steps</th>
             <th>ke_t5_nikl_summary_mixture_equal</th>
             <th>ke_t5_ko_en_qa_equal</th>
-            <th>ke_t5_ko_translation_equal</th>
+            <th>ke_t5_ko_translation_proportional</th>
         </tr>
     </thead>
     <tbody>
@@ -253,60 +253,60 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=3>ke</td>
             <td>small</td>
             <td> 1M </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1Eyew2FpBDLXceP4sCeVovAb_D1ofjuXM/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1TFcfr-10_Zhppg5mWTXkBKSLi-RPaKbC/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1fC33A4WiNZOpjJ1mL7WE0p2ZSg_Xxw0i/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1rqH5Vp3C1AOmH_sqBaqVjQ3MWpineWS4/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1fURARZ8kqwtOdVyRhgzDdCcSxxsqa46c/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1A_ce8i1E2AEFdIV0DzhRwSrNGwSey9Ny/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/11qWY8vWaDaU7JXQVInrVVxZjWXPRPrMV/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1OQVM6DJQNlpOl41YI711T4OcrI7WRKn2/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1SurwIHi0G4TkkTyBuWGqDc5gXQ_UVq4t/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
             <td>small</td>
             <td> 1M </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1RWKefyXecgYO1_T-XqV_6ddbV2iXp6n0/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1lw4a4d3oTHrklvIH7PP7dLFxWJPkC2yl/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1YZyq4eVM_yduSrlpZhzkQ9wwtk-iVn85/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1wwOgEonOzR9hZUIQvyWL0YXy6k6Utepk/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1tmeF09ezh3Qsco0WtBP25f4Q89p30Nz8/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1iK9HLR6TXKGwaFqFhzDaVKjJVzaDmxkx/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1A-31M-UELtDizmHjfpGdjgEqSMCYDiut/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1oURcluLJ778N_rD8mnLh1oLcZqQBlhLZ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1PIRrmQEg2W_OUKdwWu2T5RKq30xbgcba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
             <td> 1M </td>
-            <td> - </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/1Vx3XY6ORTtst_eVhQ3rSdHO6mozwYICz/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1Jb7tVmfhoKQXx58Oh3rZE9On5lfKgEEu/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/11trFdNAsavnLm7R3I9PTuulWjXakQ4uB/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td> <a href='https://drive.google.com/file/d/1OpjLxr2tyLi_B_iC2hDyw8PjbB-KxNlI/view?usp=sharing'> Download </a> </td>
-            <td> - </td>
-            <td> - </td>
+            <td>  <a href='https://drive.google.com/file/d/14GymkunvDhDtnCJPFHHGdtv-PadRQPPf/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1e9TR9baJXt4vuj4ieN2rPgbjfqiQVXuv/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1t4wsyYBqtB7wrN_D4oDRfIXLctJNmEba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
     </tbody>
 </table>
@@ -1045,45 +1045,45 @@ Task: `ke_t5_ko_text_classification_proportional`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--NIKL CoLA Mattew's-->
-            <td> </td> <!--NSMC Accuracy-->
-            <td> </td> <!--Question-pair F1-->
-            <td> </td> <!--Question-pair Accuracy-->
-            <td> </td> <!--KorNLI Accuracy-->
-            <td> </td> <!--KorSTS Pearson-->
-            <td> </td> <!--KorSTS Spearman-->
-            <td> </td> <!--KHSD Accuracy-->
+            <td> 1M </td>
+            <td> -3.716 </td> <!--NIKL CoLA Mattew's-->
+            <td> 87.9 </td> <!--NSMC Accuracy-->
+            <td> 87.9 </td> <!--Question-pair F1-->
+            <td> 91.5 </td> <!--Question-pair Accuracy-->
+            <td> 73.41 </td> <!--KorNLI Accuracy-->
+            <td> 78.19 </td> <!--KorSTS Pearson-->
+            <td> 77.9 </td> <!--KorSTS Spearman-->
+            <td> 60.65 </td> <!--KHSD Accuracy-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--NIKL CoLA Mattew's-->
-            <td> </td> <!--NSMC Accuracy-->
-            <td> </td> <!--Question-pair F1-->
-            <td> </td> <!--Question-pair Accuracy-->
-            <td> </td> <!--KorNLI Accuracy-->
-            <td> </td> <!--KorSTS Pearson-->
-            <td> </td> <!--KorSTS Spearman-->
-            <td> </td> <!--KHSD Accuracy-->
+            <td> 600K </td>
+            <td> 12.51 </td> <!--NIKL CoLA Mattew's-->
+            <td> 88.95 </td> <!--NSMC Accuracy-->
+            <td> 93.7 </td> <!--Question-pair F1-->
+            <td> 91.49 </td> <!--Question-pair Accuracy-->
+            <td> 78.67 </td> <!--KorNLI Accuracy-->
+            <td> 80.02 </td> <!--KorSTS Pearson-->
+            <td> 79.73 </td> <!--KorSTS Spearman-->
+            <td> 64.14 </td> <!--KHSD Accuracy-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--NIKL CoLA Mattew's-->
-            <td> </td> <!--NSMC Accuracy-->
-            <td> </td> <!--Question-pair F1-->
-            <td> </td> <!--Question-pair Accuracy-->
-            <td> </td> <!--KorNLI Accuracy-->
-            <td> </td> <!--KorSTS Pearson-->
-            <td> </td> <!--KorSTS Spearman-->
-            <td> </td> <!--KHSD Accuracy-->
+            <td> 600K </td>
+            <td> 13.31 </td> <!--NIKL CoLA Mattew's-->
+            <td> 89.7 </td> <!--NSMC Accuracy-->
+            <td> 89.74 </td> <!--Question-pair F1-->
+            <td> 92.52 </td> <!--Question-pair Accuracy-->
+            <td> 79.76 </td> <!--KorNLI Accuracy-->
+            <td> 83.65 </td> <!--KorSTS Pearson-->
+            <td> 83.25 </td> <!--KorSTS Spearman-->
+            <td> 62.82 </td> <!--KHSD Accuracy-->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
             <td>small</td>
             <td> 1M </td>
-            <td> 18.78 </td> <!--NIKL CoLA Mattew's-->
+            <td> 4.088 </td> <!--NIKL CoLA Mattew's-->
             <td> 88.09 </td> <!--NSMC Accuracy-->
             <td> 90.55 </td> <!--Question-pair F1-->
             <td> 91.94 </td> <!--Question-pair Accuracy-->
@@ -1117,33 +1117,21 @@ Task: `ke_t5_ko_text_classification_proportional`
             <td> 61.25 </td> <!--KHSD Accuracy-->
         </tr>
         <tr>
-            <td rowspan=3>ko</td>
+            <td rowspan=2>ko</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--NIKL CoLA Mattew's-->
-            <td> </td> <!--NSMC Accuracy-->
-            <td> </td> <!--Question-pair F1-->
-            <td> </td> <!--Question-pair Accuracy-->
-            <td> </td> <!--KorNLI Accuracy-->
-            <td> </td> <!--KorSTS Pearson-->
-            <td> </td> <!--KorSTS Spearman-->
-            <td> </td> <!--KHSD Accuracy-->
+            <td> 1M </td>
+            <td> 0.7339 </td> <!--NIKL CoLA Mattew's-->
+            <td> 86.2 </td> <!--NSMC Accuracy-->
+            <td> 88.93 </td> <!--Question-pair F1-->
+            <td> 92.08 </td> <!--Question-pair Accuracy-->
+            <td> 74.38 </td> <!--KorNLI Accuracy-->
+            <td> 77.24 </td> <!--KorSTS Pearson-->
+            <td> 75.99 </td> <!--KorSTS Spearman-->
+            <td> 59.93 </td> <!--KHSD Accuracy-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--NIKL CoLA Mattew's-->
-            <td> </td> <!--NSMC Accuracy-->
-            <td> </td> <!--Question-pair F1-->
-            <td> </td> <!--Question-pair Accuracy-->
-            <td> </td> <!--KorNLI Accuracy-->
-            <td> </td> <!--KorSTS Pearson-->
-            <td> </td> <!--KorSTS Spearman-->
-            <td> </td> <!--KHSD Accuracy-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--NIKL CoLA Mattew's-->
             <td> </td> <!--NSMC Accuracy-->
             <td> </td> <!--Question-pair F1-->
@@ -1193,36 +1181,36 @@ Task: `ke_t5_glue_v002_proportional`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
+            <td> 1M </td>
             <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
+            <td> 27.31 </td> <!--CoLA Mattew's-->
+            <td> 89.11 </td> <!--SST-2 Accuracy-->
+            <td> 88.69 </td> <!--MRPC F1-->
+            <td> 84.31 </td> <!--MRPC Accuracy-->
+            <td> 81.14 </td> <!--STS-B Pearson-->
+            <td> 81.38 </td> <!--STS-B Spearman-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
+            <td> 38.26 </td> <!--CoLA Mattew's-->
+            <td> 83.73 </td> <!--SST-2 Accuracy-->
+            <td> 90.43 </td> <!--MRPC F1-->
+            <td> 86.76 </td> <!--MRPC Accuracy-->
+            <td> 85.8 </td> <!--STS-B Pearson-->
+            <td> 85.82 </td> <!--STS-B Spearman-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
+            <td> 39.85 </td> <!--CoLA Mattew's-->
+            <td> 91.28 </td> <!--SST-2 Accuracy-->
+            <td> 89.05 </td> <!--MRPC F1-->
+            <td> 85.05 </td> <!--MRPC Accuracy-->
+            <td> 88.14 </td> <!--STS-B Pearson-->
+            <td> 88.14 </td> <!--STS-B Spearman-->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
@@ -1259,38 +1247,27 @@ Task: `ke_t5_glue_v002_proportional`
             <td> 87.85 </td> <!--STS-B Spearman-->
         </tr>
         <tr>
-            <td rowspan=3>ko</td>
+            <td rowspan=2>ko</td>
             <td>small</td>
-            <td></td>
+            <td> 1M </td>
             <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
+            <td> 8.699 </td> <!--CoLA Mattew's-->
+            <td> 82.8 </td> <!--SST-2 Accuracy-->
+            <td> 85.46 </td> <!--MRPC F1-->
+            <td> 79.66 </td> <!--MRPC Accuracy-->
+            <td> 76.75 </td> <!--STS-B Pearson-->
+            <td> 76.35 </td> <!--STS-B Spearman-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--GLUE average-->
-            <td> </td> <!--CoLA Mattew's-->
-            <td> </td> <!--SST-2 Accuracy-->
-            <td> </td> <!--MRPC F1-->
-            <td> </td> <!--MRPC Accuracy-->
-            <td> </td> <!--STS-B Pearson-->
-            <td> </td> <!--STS-B Spearman-->
+            <td> 5.622 </td> <!--CoLA Mattew's-->
+            <td> 82.23 </td> <!--SST-2 Accuracy-->
+            <td> 83.2 </td> <!--MRPC F1-->
+            <td> 84.8 </td> <!--MRPC Accuracy-->
+            <td> 80.78 </td> <!--STS-B Pearson-->
+            <td> 80.89 </td> <!--STS-B Spearman-->
         </tr>
     </tbody>
 </table>
@@ -1322,35 +1299,35 @@ Task: `ke_t5_glue_v002_proportional`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
+            <td> 1M </td>
+            <td> 83.54 </td> <!--QQP F1-->
+            <td> 89.07 </td> <!--QQP Accuracy-->
+            <td> 78.06 </td> <!--MNLI-m Accuracy-->
+            <td> 78.94 </td> <!--MNLI-mm Accuracy-->
+            <td> 86.55 </td> <!--QNLI Accuracy-->
+            <td> 64.26 </td> <!--RTE Accuracy-->
             <td> </td> <!--WNLI Accuracy-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
+            <td> 600K </td>
+            <td> 90.19 </td> <!--QQP F1-->
+            <td> 86.78 </td> <!--QQP Accuracy-->
+            <td> 83.73 </td> <!--MNLI-m Accuracy-->
+            <td> 83.86 </td> <!--MNLI-mm Accuracy-->
+            <td> 89.79 </td> <!--QNLI Accuracy-->
+            <td> 79.42 </td> <!--RTE Accuracy-->
             <td> </td> <!--WNLI Accuracy-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
+            <td> 600K </td>
+            <td> 86.5 </td> <!--QQP F1-->
+            <td> 89.86 </td> <!--QQP Accuracy-->
+            <td> 83.73 </td> <!--MNLI-m Accuracy-->
+            <td> 84.39 </td> <!--MNLI-mm Accuracy-->
+            <td> 90.21 </td> <!--QNLI Accuracy-->
+            <td> 79.42 </td> <!--RTE Accuracy-->
             <td> </td> <!--WNLI Accuracy-->
         </tr>
         <tr>
@@ -1378,7 +1355,7 @@ Task: `ke_t5_glue_v002_proportional`
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
+            <td> 600K </td>
             <td> 87.67 </td> <!--QQP F1-->
             <td> 90.64 </td> <!--QQP Accuracy-->
             <td> 86.14 </td> <!--MNLI-m Accuracy-->
@@ -1390,35 +1367,24 @@ Task: `ke_t5_glue_v002_proportional`
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
+            <td> 1M </td>
+            <td> 83.48 </td> <!--QQP F1-->
+            <td> 87.61 </td> <!--QQP Accuracy-->
+            <td> 72.68 </td> <!--MNLI-m Accuracy-->
+            <td> 72.91 </td> <!--MNLI-mm Accuracy-->
+            <td> 87.58 </td> <!--QNLI Accuracy-->
+            <td> 62.82 </td> <!--RTE Accuracy-->
             <td> </td> <!--WNLI Accuracy-->
         </tr>
         <tr>
-            <td>small</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WNLI Accuracy-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--QQP F1-->
-            <td> </td> <!--QQP Accuracy-->
-            <td> </td> <!--MNLI-m Accuracy-->
-            <td> </td> <!--MNLI-mm Accuracy-->
-            <td> </td> <!--QNLI Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
+            <td>base</td>
+            <td> 600K </td>
+            <td> 85.06 </td> <!--QQP F1-->
+            <td> 88.79 </td> <!--QQP Accuracy-->
+            <td> 75.62 </td> <!--MNLI-m Accuracy-->
+            <td> 75.97 </td> <!--MNLI-mm Accuracy-->
+            <td> 82.35 </td> <!--QNLI Accuracy-->
+            <td> 62.45 </td> <!--RTE Accuracy-->
             <td> </td> <!--WNLI Accuracy-->
         </tr>
     </tbody>
@@ -1468,51 +1434,51 @@ Task: `ke_t5_super_glue_v102_proportional`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
+            <td> 1M </td>
             <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
+            <td> 70.86 </td> <!--BoolQ Accuracy-->
+            <td> 70.34 </td> <!--CB F1-->
+            <td> 76.79 </td> <!--CB Accuracy-->
+            <td> 54 </td> <!--COPA Accuracy-->
+            <td> 65.57 </td> <!--MultiRC F1a-->
+            <td> 17.94 </td> <!--MultiRC EM-->
+            <td> 63.86 </td> <!--ReCoRD F1-->
+            <td> 61.87 </td> <!--ReCoRD Accuracy-->
+            <td> 63.9 </td> <!--RTE Accuracy-->
+            <td> 60.97 </td> <!--WiC Accuracy-->
+            <td> 59.25 </td> <!--WSC Accuracy-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
+            <td> 77.31 </td> <!--BoolQ Accuracy-->
+            <td> 73.08 </td> <!--CB F1-->
+            <td> 87.5 </td> <!--CB Accuracy-->
+            <td> 72 </td> <!--COPA Accuracy-->
+            <td> 73.24 </td> <!--MultiRC F1a-->
+            <td> 31.9 </td> <!--MultiRC EM-->
+            <td> 76.9 </td> <!--ReCoRD F1-->
+            <td> 76.07 </td> <!--ReCoRD Accuracy-->
+            <td> 79.78 </td> <!--RTE Accuracy-->
+            <td> 64.73 </td> <!--WiC Accuracy-->
+            <td> 74.04 </td> <!--WSC Accuracy-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
+            <td> 76.06 </td> <!--BoolQ Accuracy-->
+            <td> 61 </td> <!--CB F1-->
+            <td> 87.5 </td> <!--CB Accuracy-->
+            <td> 67 </td> <!--COPA Accuracy-->
+            <td> 76.25 </td> <!--MultiRC F1a-->
+            <td> 36.62 </td> <!--MultiRC EM-->
+            <td> 81.29 </td> <!--ReCoRD F1-->
+            <td> 80.31 </td> <!--ReCoRD Accuracy-->
+            <td> 82.31 </td> <!--RTE Accuracy-->
+            <td> 63.95 </td> <!--WiC Accuracy-->
+            <td> 72.12 </td> <!--WSC Accuracy-->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
@@ -1566,51 +1532,35 @@ Task: `ke_t5_super_glue_v102_proportional`
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
-            <td></td>
+            <td> 1M </td>
             <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
+            <td> 66.18 </td> <!--BoolQ Accuracy-->
+            <td> 53.08 </td> <!--CB F1-->
+            <td> 66.07 </td> <!--CB Accuracy-->
+            <td> 52 </td> <!--COPA Accuracy-->
+            <td> 63.31 </td> <!--MultiRC F1a-->
+            <td> 18.47 </td> <!--MultiRC EM-->
+            <td> 47.41 </td> <!--ReCoRD F1-->
+            <td> 46.42 </td> <!--ReCoRD Accuracy-->
+            <td> 58.84 </td> <!--RTE Accuracy-->
+            <td> 58.31 </td> <!--WiC Accuracy-->
+            <td> 60.58 </td> <!--WSC Accuracy-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--Super GLUE Average-->
-            <td> </td> <!--BoolQ Accuracy-->
-            <td> </td> <!--CB F1-->
-            <td> </td> <!--CB Accuracy-->
-            <td> </td> <!--COPA Accuracy-->
-            <td> </td> <!--MultiRC F1a-->
-            <td> </td> <!--MultiRC EM-->
-            <td> </td> <!--ReCoRD F1-->
-            <td> </td> <!--ReCoRD Accuracy-->
-            <td> </td> <!--RTE Accuracy-->
-            <td> </td> <!--WiC Accuracy-->
-            <td> </td> <!--WSC Accuracy-->
+            <td> 69.66 </td> <!--BoolQ Accuracy-->
+            <td> 56.5 </td> <!--CB F1-->
+            <td> 69.64 </td> <!--CB Accuracy-->
+            <td> 49 </td> <!--COPA Accuracy-->
+            <td> 67.19 </td> <!--MultiRC F1a-->
+            <td> 18.36 </td> <!--MultiRC EM-->
+            <td> 55.45 </td> <!--ReCoRD F1-->
+            <td> 54.51 </td> <!--ReCoRD Accuracy-->
+            <td> 66.06 </td> <!--RTE Accuracy-->
+            <td> 63.95 </td> <!--WiC Accuracy-->
+            <td> 61.06 </td> <!--WSC Accuracy-->
         </tr>
     </tbody>
 </table>
@@ -1645,27 +1595,27 @@ Task: `ke_t5_ko_en_qa_equal`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
+            <td> 1M </td>
+            <td> 72.88 </td> <!--SQuAD EM-->
+            <td> 82.8 </td> <!--SQuAD F1-->
+            <td> 82.16 </td> <!--KorQuAD 1.1 EM-->
+            <td> 88.39 </td> <!--KorQuAD 1.1 F1-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
+            <td> 600K </td>
+            <td> 78.43 </td> <!--SQuAD EM-->
+            <td> 88.01 </td> <!--SQuAD F1-->
+            <td> 85.45 </td> <!--KorQuAD 1.1 EM-->
+            <td> 91.11 </td> <!--KorQuAD 1.1 F1-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
+            <td> 600K </td>
+            <td> 81.33 </td> <!--SQuAD EM-->
+            <td> 90.03 </td> <!--SQuAD F1-->
+            <td> 86.27 </td> <!--KorQuAD 1.1 EM-->
+            <td> 92.06 </td> <!--KorQuAD 1.1 F1-->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
@@ -1695,24 +1645,16 @@ Task: `ke_t5_ko_en_qa_equal`
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
+            <td> 1M </td>
+            <td> 63.89 </td> <!--SQuAD EM-->
+            <td> 75.13 </td> <!--SQuAD F1-->
+            <td> 82.78 </td> <!--KorQuAD 1.1 EM-->
+            <td> 88.99 </td> <!--KorQuAD 1.1 F1-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--SQuAD EM-->
+            <td> 600K </td>
+            <td>  </td> <!--SQuAD EM-->
             <td> </td> <!--SQuAD F1-->
             <td> </td> <!--KorQuAD 1.1 EM-->
             <td> </td> <!--KorQuAD 1.1 F1-->
@@ -1754,32 +1696,32 @@ Task: `ke_t5_ko_translation_proportional`
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L-->
+            <td> 1M </td>
+            <td> 10.02 </td> <!--en->ko Rouge-1-->
+            <td> 2.072 </td> <!--en->ko Rouge-2-->
+            <td> 9.951 </td> <!--en->ko Rouge-L-->
+            <td> 39.19 </td> <!--ko->en Rouge-1-->
+            <td> 19.78 </td> <!--ko->en Rouge-2-->
+            <td> 35.15 </td> <!--ko->en Rouge-L-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L-->
+            <td> 600K </td>
+            <td> 12.03 </td> <!--en->ko Rouge-1-->
+            <td> 2.805 </td> <!--en->ko Rouge-2-->
+            <td> 11.94 </td> <!--en->ko Rouge-L-->
+            <td> 44.12 </td> <!--ko->en Rouge-1-->
+            <td> 19.76 </td> <!--ko->en Rouge-2-->
+            <td> 39.35 </td> <!--ko->en Rouge-L-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
+            <td> 600K </td>
+            <td> 11.45 </td> <!--en->ko Rouge-1-->
+            <td> 2.96 </td> <!--en->ko Rouge-2-->
             <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
+            <td> 44.52 </td> <!--ko->en Rouge-1-->
+            <td> 20.21 </td> <!--ko->en Rouge-2-->
             <td> </td> <!--ko->en Rouge-L-->
         </tr>
         <tr>
@@ -1805,44 +1747,34 @@ Task: `ke_t5_ko_translation_proportional`
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L-->
+            <td> 600K </td>
+            <td> 11.73 </td> <!--en->ko Rouge-1-->
+            <td> 2.948 </td> <!--en->ko Rouge-2-->
+            <td> 11.61 </td> <!--en->ko Rouge-L-->
+            <td> 46.84 </td> <!--ko->en Rouge-1-->
+            <td> 22.29 </td> <!--ko->en Rouge-2-->
+            <td> 42.98 </td> <!--ko->en Rouge-L-->
         </tr>
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L-->
+            <td> 1M </td>
+            <td> 10.3 </td> <!--en->ko Rouge-1-->
+            <td> 1.993 </td> <!--en->ko Rouge-2-->
+            <td> 10.16 </td> <!--en->ko Rouge-L-->
+            <td> 38.96 </td> <!--ko->en Rouge-1-->
+            <td> 14.79 </td> <!--ko->en Rouge-2-->
+            <td> 35.02 </td> <!--ko->en Rouge-L-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 1M </td>
             <td> </td> <!--en->ko Rouge-1-->
             <td> </td> <!--en->ko Rouge-2-->
             <td> </td> <!--en->ko Rouge-L-->
             <td> </td> <!--ko->en Rouge-1-->
             <td> </td> <!--ko->en Rouge-2-->
             <td> </td> <!--ko->en Rouge-L-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L--> 
         </tr>
     </tbody>
 </table>
@@ -1884,42 +1816,42 @@ Task: `ke_t5_ko_en_summary_proportional` for **CNN/DM**, `ke_t5_nikl_summary_mix
         <tr>
             <td rowspan=3>ke</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 1M </td>
+            <td> 37.94 </td> <!--CNN/DM Rouge-1-->
+            <td> 17.9 </td> <!--CNN/DM Rouge-2-->
+            <td> 35.86 </td> <!--CNN/DM Rouge-L-->
+            <td> 38.85 </td> <!--NIKL summary Rouge-1-->
+            <td> 18.65 </td> <!--NIKL summary Rouge-2-->
+            <td> 37.35 </td> <!--NIKL summary Rouge-L-->
+            <td> 48.79 </td> <!--NIKL topic Rouge-1-->
+            <td> 32.51 </td> <!--NIKL topic Rouge-2-->
+            <td> 47.75 </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 600K </td>
+            <td> 37.84 </td> <!--CNN/DM Rouge-1-->
+            <td> 15.38 </td> <!--CNN/DM Rouge-2-->
+            <td> 38.33 </td> <!--CNN/DM Rouge-L-->
+            <td> 40.86 </td> <!--NIKL summary Rouge-1-->
+            <td> 19.58 </td> <!--NIKL summary Rouge-2-->
+            <td> 39.36 </td> <!--NIKL summary Rouge-L-->
+            <td> 50.71 </td> <!--NIKL topic Rouge-1-->
+            <td> 35.43 </td> <!--NIKL topic Rouge-2-->
+            <td> 50.35 </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td>large</td>
-            <td></td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
+            <td> 600K </td>
+            <td> 40.15 </td> <!--CNN/DM Rouge-1-->
+            <td> 17.78 </td> <!--CNN/DM Rouge-2-->
             <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 40.54 </td> <!--NIKL summary Rouge-1-->
+            <td> 20.04 </td> <!--NIKL summary Rouge-2-->
+            <td> 39.25 </td> <!--NIKL summary Rouge-L-->
+            <td> 55.52 </td> <!--NIKL topic Rouge-1-->
+            <td> 37.72 </td> <!--NIKL topic Rouge-2-->
+            <td> 54.78 </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
@@ -1938,67 +1870,54 @@ Task: `ke_t5_ko_en_summary_proportional` for **CNN/DM**, `ke_t5_nikl_summary_mix
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 40.64 </td> <!--CNN/DM Rouge-1-->
+            <td> 18.98 </td> <!--CNN/DM Rouge-2-->
+            <td> 38.03 </td> <!--CNN/DM Rouge-L-->
+            <td> 40.54 </td> <!--NIKL summary Rouge-1-->
+            <td> 20.44 </td> <!--NIKL summary Rouge-2-->
+            <td> 39.23 </td> <!--NIKL summary Rouge-L-->
+            <td> 54 </td> <!--NIKL topic Rouge-1-->
+            <td> 37.63 </td> <!--NIKL topic Rouge-2-->
+            <td> 53.2 </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 39.48 </td> <!--CNN/DM Rouge-1-->
+            <td> 17.46 </td> <!--CNN/DM Rouge-2-->
+            <td> 36.79 </td> <!--CNN/DM Rouge-L-->
+            <td> 39.76 </td> <!--NIKL summary Rouge-1-->
+            <td> 18.12 </td> <!--NIKL summary Rouge-2-->
+            <td> 38.25 </td> <!--NIKL summary Rouge-L-->
+            <td> 53.58 </td> <!--NIKL topic Rouge-1-->
+            <td> 38.17 </td> <!--NIKL topic Rouge-2-->
+            <td> 53.15 </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
-            <td></td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
+            <td> 1M </td>
+            <td> 37.39 </td> <!--CNN/DM Rouge-1-->
+            <td> 16.49 </td> <!--CNN/DM Rouge-2-->
+            <td> 35.73 </td> <!--CNN/DM Rouge-L-->
+            <td> 39.2 </td> <!--NIKL summary Rouge-1-->
+            <td> 17.95 </td> <!--NIKL summary Rouge-2-->
             <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
+            <td> 50.28 </td> <!--NIKL topic Rouge-1-->
+            <td> 34.95 </td> <!--NIKL topic Rouge-2-->
             <td> </td> <!--NIKL topic Rouge-L-->
         </tr>
         <tr>
             <td>base</td>
-            <td></td>
+            <td> 600K </td>
             <td> </td> <!--CNN/DM Rouge-1-->
             <td> </td> <!--CNN/DM Rouge-2-->
             <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
+            <td> 37.93 </td> <!--NIKL summary Rouge-1-->
+            <td> 17.74 </td> <!--NIKL summary Rouge-2-->
             <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td></td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
-            <td> </td> <!--NIKL summary Rouge-1-->
-            <td> </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
-            <td> </td> <!--NIKL topic Rouge-1-->
-            <td> </td> <!--NIKL topic Rouge-2-->
+            <td> 48.71 </td> <!--NIKL topic Rouge-1-->
+            <td> 33.85 </td> <!--NIKL topic Rouge-2-->
             <td> </td> <!--NIKL topic Rouge-L-->
         </tr>
     </tbody>
