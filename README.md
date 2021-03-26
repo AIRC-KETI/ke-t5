@@ -1,13 +1,35 @@
-# ke-t5: Korean-English T5
+# KE-T5: Korean-English T5
 
-## Fine-tuning on downstream task
+KE-T5는 [Text-to-Text Transfer Transformer](https://arxiv.org/abs/1910.10683) 모델을 한국어와 영어 코퍼스를 이용하여 사전학습한 모델입니다.
 
-### Install pip packages
+Vocabulary는 64,000개의 sub-word token으로 이루어져 있으며, Google의 [sentencepiece](https://github.com/google/sentencepiece)를 이용하여 만들었습니다. Sentencepiece 모델은 한국어와 영어가 약 7:3의 비율로 섞인 50GB의 코퍼스를 99.95% 커버하도록 학습되었습니다.
+
+사전학습에 사용된 비정형 코퍼스에 대한 구성과 정보는 [Datasets](#datasets)을 참고하시기 바랍니다.
+
+<br>
+<br>
+
+## Fine-tuning
+
+KE-T5를 이용하여 Downstream task를 학습하기 위해서는 먼저 pre-trained model을 다운 받아야 합니다. [pre-trained models](#pretrained-models)에서 다운 받으실 수 있습니다.\
+
+이 섹션에서는 [Google Cloud Platform](https://cloud.google.com/)에서 TPU를 이용하여 학습하는 방법만 설명합니다. GPU에서 사용하실 경우 [T5 github](https://github.com/google-research/text-to-text-transfer-transformer#gpu-usage)에서 설명하듯이 [gin-config](https://github.com/google/gin-config)의 `utils.run.mesh_devices`와 `utils.run.mesh_shape` parameter를 오버라이드 해주시면 됩니다.\
+[TFRC](https://www.tensorflow.org/tfrc)를 이용하시면 TPU를 한달간 무료로 사용하실 수 있습니다.
+
+먼저 되도록 TPU Zone과 동일한 곳에 버킷과 VM instance를 생성합니다. VM instance와 TPU의 area는 버킷보다 세분화 되어 있습니다.
+생성한 VM instance에 접속한 후 아래와 같이 repository를 clone하고 필요한 python package들을 설치합니다.
+
+### Install packages
 ```bash
     git clone https://github.com/AIRC-KETI/ke-t5.git
     cd ke-t5
     pip3 install -r requirements.txt
 ```
+
+datasets 폴더에 있는 script로 데이터셋을 생성하고 Bucket에 복사합니다. 아래의 스크립트에서는 생성된 데이터셋을 버킷의 root에 복사한다고 가정했습니다. 데이터셋 생성방법은 [여기](datasets/README.md)를 확인하시기 바랍니다.\
+또한 다운받은 pre-trained 모델도 버킷에 저장하고 해당 디렉토리를 `PRETRAINED_MODEL_DIR` 변수에 assign합니다.\
+학습하고자 하는 task를 `TASK` 변수에 assign합니다.\
+아래 스크립트와 같이 TPU를 생성하고 모델을 학습합니다.
 
 ### Run downstream tasks on your TPU
 ```bash
@@ -15,11 +37,13 @@ export TPU_NAME=your_tpu_name
 export ZONE=your_project_zone
 export TPU_SIZE=v3-8
 
-ctpu up --name=$TPU_NAME --project=self-supervised-training --zone=$ZONE --tpu-size=$TPU_SIZE --tf-version=2.4.1 --tpu-only --noconf
+# create TPU
+ctpu up --name=$TPU_NAME --project=self-supervised-training \
+--zone=$ZONE --tpu-size=$TPU_SIZE --tf-version=2.4.1 --tpu-only --noconf
 
 export PROJECT=your_project_name
-export BUCKET=gs://yourbucket/
-export PRETRAINED_MODEL_DIR="${BUCKET}/your_pretrained_model_dir" # <-- put a checkpoint file of a pre-trained model in this directory.
+export BUCKET=gs://yourbucket
+export PRETRAINED_MODEL_DIR="${BUCKET}/your_pretrained_model_dir"
 export DATA_DIR="${BUCKET}/tensorflow_datasets"
 export MODEL_DIR="${BUCKET}/your_model_dir"
 
@@ -52,7 +76,15 @@ python3 -m t5.models.mesh_transformer_main \
         --module_import="ke_t5.tasks"
 ```
 
-### How to use a saved model (exported tensorflow model)
+## How to use a saved model (exported tensorflow model)
+
+Pre-trained 모델의 체크포인트뿐만 아니라 일부 Downstream tasks의 saved model도 공개했습니다.\
+Tensorflow saved 모델은 `tensorflow`와 `tensorflow_text`가 설치되어 있으면 바로 사용하실 수 있습니다.
+아래 예는 python에서 saved model을 사용하는 방법이며, `ke_t5_nikl_summary_mixture_equal` task를 다운받았다고 가정하고 있습니다.
+
+`ke_t5_nikl_summary_mixture_equal` task는 `ke_t5_nikl_summarization_summary`와 `ke_t5_nikl_summarization_topic`의 mixture tasks이며, 각각 `summarize_topic`과 `summarize_summary`로 입력 텍스트가 시작합니다.
+`ke_t5_nikl_summarization_summary`은 사람이 요약한 데이터를 이용하여 학습하며, `ke_t5_nikl_summarization_topic`은 topic sentences를 생성하도록 학습됩니다.
+
 
 ```python
 # pip install tensorflow tensorflow_text
@@ -60,20 +92,37 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_text
 
-model_path = "path to exported model dir" # 'saved_model.pb','variable' should be in the directory.
+model_path = "path to exported model dir"
 loaded = tf.saved_model.load(model_path)
 infer = loaded.signatures["serving_default"]
 
-# We assume that the task of the model is 'ke_t5_nikl_summary_mixture_equal'.
-# There are two types of summary actions in 'ke_t5_nikl_summary_mixture_equal'.
-# These are "summarize_topic" and "summarize_summary".
-# 'summarize_topic' selects a topic sentence from the input text.
-# 'summarize_summary' generates a summary of the input text.
-
-# source of input_str : https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=102&oid=081&aid=0003173411
+# source: https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=102&oid=081&aid=0003173411
 # press: 서울신문(www.seoul.co.kr)
 # author: 이주원 기자 starjuwon@seoul.co.kr
-input_str = """“처음에는 ‘금방 끝나겠지’라고 생각했는데 어느덧 100일이 됐네요. 그동안 춥고 아프고 힘들었지만 인간으로서 대우를 받을 수만 있다면 끝까지 버틸 수 있습니다.” LG트윈타워 청소 노동자들이 고용승계를 주장하며 파업에 나선지 100일째를 하루 앞둔 24일 서울 여의도 LG트윈타워 앞 ‘행복한 고용승계 텐트촌’에서 만난 박상설(63)씨는 힘들었던 투쟁 과정을 회상하며 눈시울을 붉혔다. 박씨는 2017년부터 LG트윈타워에서 청소 노동을 했지만 지난 1월 1일부로 계약이 종료돼 직장을 떠났다. 자동차 소음과 불편한 잠자리로 텐트에서 매일 밤잠을 설치지만 투쟁을 포기할 수 없다고 한다. 그는 “LG가 그동안 사회적 책임과 정도경영을 강조해 왔기에 파업이 금방 끝날 줄 알았다”며 “버티지 못하고 점점 떠나는 동지들을 바라볼 때마다 마음이 아프지만 정당한 노동 권리를 인정받기 위해 끝까지 투쟁할 것”이라고 강조했다. 지난해 11월 26일부터 파업에 돌입한 청소 노동자들은 25일 파업 100일째를 맞는다. 건물 1층 로비에서 시위를 하던 25명의 청소 노동자들은 지난 22일부터 정문 앞 도보에 텐트촌을 설치하고 장소를 옮겼다. 파업 100일에 맞춰 25일까지 시민연대와 함께 텐트 100개를 설치하고 주·야간 연대 시위를 이어가겠다는 뜻에서다. 노동자들은 한 명이 간신히 누울 수 있는 크기의 텐트 안에서 딱딱한 시멘트 바닥에 몸을 기대 쪽잠을 청하고 있다. LG트윈타워를 관리하는 LG그룹 계열사 ‘에스엔아이코퍼레이션’은 지난해 말 ‘지수아이앤씨’와 청소 용역 계약을 끝내고 다른 업체와 새로 계약했다. 사측은 ‘품질 저하’를 이유로 들었다. 반면 노동자들은 2019년 노조를 결성하고 권리를 주장하기 시작하면서 사측 눈 밖에 났다고 주장한다. 그동안 업체가 변경되더라도 기존 업체 노동자들이 새 업체에 고용승계가 되는 게 관례였지만 새 업체는 고용승계를 보장할 수 없다고 밝혔다. 지난달까지 고용노동부 중재로 수차례 노사 교섭이 있었지만 상황은 달라지지 않았다. 사측은 대신 노동자들에게 다른 사업장에서 일을 하게 해주겠다고 권유했다. 하지만 노동자들은 노조를 인정하지 않는 대기업의 행태를 묵인한 채 사측의 권유에 따른다면 어느 사업장에서 일을 하던 똑같은 행태가 반복될 수밖에 없다고 목소리를 높인다. 때문에 반드시 LG트윈타워에서 정당한 권리를 인정받고 노동을 이어가야만 한다고 말한다. 이들은 구광모 LG그룹 회장이 나서 문제를 해결해야 한다고 주장한다. 이혜정 LG트윈타워 공동대책위원회 집행위원은 “구 회장이 책임있는 답변을 내놓을 때까지 시민사회 단위와 함께 결의를 담아 끝까지 텐트촌을 유지할 것”이라고 강조했다."""
+input_str = """“처음에는 ‘금방 끝나겠지’라고 생각했는데 어느덧 100일이 됐네요. \
+그동안 춥고 아프고 힘들었지만 인간으로서 대우를 받을 수만 있다면 끝까지 버틸 수 있습니다.” \
+LG트윈타워 청소 노동자들이 고용승계를 주장하며 파업에 나선지 100일째를 하루 앞둔 24일 \
+서울 여의도 LG트윈타워 앞 ‘행복한 고용승계 텐트촌’에서 만난 박상설(63)씨는 힘들었던 투쟁 과정을 \
+회상하며 눈시울을 붉혔다. 박씨는 2017년부터 LG트윈타워에서 청소 노동을 했지만 지난 1월 1일부로 \
+계약이 종료돼 직장을 떠났다. 자동차 소음과 불편한 잠자리로 텐트에서 매일 밤잠을 설치지만 투쟁을 \
+포기할 수 없다고 한다. 그는 “LG가 그동안 사회적 책임과 정도경영을 강조해 왔기에 파업이 금방 끝날 \
+줄 알았다”며 “버티지 못하고 점점 떠나는 동지들을 바라볼 때마다 마음이 아프지만 정당한 노동 권리를 \
+인정받기 위해 끝까지 투쟁할 것”이라고 강조했다. 지난해 11월 26일부터 파업에 돌입한 청소 \
+노동자들은 25일 파업 100일째를 맞는다. 건물 1층 로비에서 시위를 하던 25명의 청소 노동자들은 지난 \
+22일부터 정문 앞 도보에 텐트촌을 설치하고 장소를 옮겼다. 파업 100일에 맞춰 25일까지 시민연대와 \
+함께 텐트 100개를 설치하고 주·야간 연대 시위를 이어가겠다는 뜻에서다. 노동자들은 한 명이 간신히 \
+누울 수 있는 크기의 텐트 안에서 딱딱한 시멘트 바닥에 몸을 기대 쪽잠을 청하고 있다. LG트윈타워를 \
+관리하는 LG그룹 계열사 ‘에스엔아이코퍼레이션’은 지난해 말 ‘지수아이앤씨’와 청소 용역 계약을 \
+끝내고 다른 업체와 새로 계약했다. 사측은 ‘품질 저하’를 이유로 들었다. 반면 노동자들은 2019년 \
+노조를 결성하고 권리를 주장하기 시작하면서 사측 눈 밖에 났다고 주장한다. 그동안 업체가 \
+변경되더라도 기존 업체 노동자들이 새 업체에 고용승계가 되는 게 관례였지만 새 업체는 고용승계를 \
+보장할 수 없다고 밝혔다. 지난달까지 고용노동부 중재로 수차례 노사 교섭이 있었지만 상황은 달라지지 \
+않았다. 사측은 대신 노동자들에게 다른 사업장에서 일을 하게 해주겠다고 권유했다. 하지만 노동자들은 \
+노조를 인정하지 않는 대기업의 행태를 묵인한 채 사측의 권유에 따른다면 어느 사업장에서 일을 하던 \
+똑같은 행태가 반복될 수밖에 없다고 목소리를 높인다. 때문에 반드시 LG트윈타워에서 정당한 권리를 \
+인정받고 노동을 이어가야만 한다고 말한다. 이들은 구광모 LG그룹 회장이 나서 문제를 해결해야 한다고 \
+주장한다. 이혜정 LG트윈타워 공동대책위원회 집행위원은 “구 회장이 책임있는 답변을 내놓을 때까지 \
+시민사회 단위와 함께 결의를 담아 끝까지 텐트촌을 유지할 것”이라고 강조했다."""
 
 input_str_topic = "summarize_topic: " + input_str
 input_str_summary = "summarize_summary: " + input_str
@@ -85,15 +134,26 @@ print([out.decode('utf-8') for out in result['inputs'].numpy()])
 print([out.decode('utf-8') for out in result['outputs'].numpy()])
 
 # summarize_topic
-# 'LG트윈타워 청소 노동자가 고용승계를 주장하며 파업에 나선지 100일째를 하루 앞둔 24일 서울 여의도 LG트윈타워 앞 ‘행복한 고용승계 텐트촌’에서 만난 박상설(63)씨는 힘들었던 투쟁 과정을 회상하며 눈시울을 붉혔다. 반면 노동자들은 2019년 노조를 결성하고 권리를 주장하기 시작하면서 사측 눈 밖에 났다고 주장한다. 때문에 반드시 LG트윈타워에서 정당한 권리를 인정받고 노동을 이어가야 한다고 말한다.
+# 'LG트윈타워 청소 노동자가 고용승계를 주장하며 파업에 나선지 100일째를 하루 앞둔 24일 서울 \
+# 여의도 LG트윈타워 앞 ‘행복한 고용승계 텐트촌’에서 만난 박상설(63)씨는 힘들었던 투쟁 과정을 \
+# 회상하며 눈시울을 붉혔다. 반면 노동자들은 2019년 노조를 결성하고 권리를 주장하기 시작하면서 사측 \
+# 눈 밖에 났다고 주장한다. 때문에 반드시 LG트윈타워에서 정당한 권리를 인정받고 노동을 이어가야 \
+# 한다고 말한다.
 
 # summarize_summary
-# 'LG트윈타워 청소 노동자가 고용승계를 주장하며 파업에 나선지 100일째를 맞았다. LG트윈타워를 관리하는 LG그룹 계열사 ‘에스엔아이코퍼레이션’은 지난해 말 ‘지수아이앤씨’와 청소 용역 계약을 끝내고 다른 업체와 새로 계약했다. 그러나 노동자들은 노조를 인정하지 않는 대기업의 행태를 묵인한 채 사측의 권유에 따라 노동을 이어가라고 주장한다.'
+# 'LG트윈타워 청소 노동자가 고용승계를 주장하며 파업에 나선지 100일째를 맞았다. LG트윈타워를 \
+# 관리하는 LG그룹 계열사 ‘에스엔아이코퍼레이션’은 지난해 말 ‘지수아이앤씨’와 청소 용역 계약을 \
+# 끝내고 다른 업체와 새로 계약했다. 그러나 노동자들은 노조를 인정하지 않는 대기업의 행태를 묵인한 \
+# 채 사측의 권유에 따라 노동을 이어가라고 주장한다.'
 
 ```
 
 
 ## Datasets
+
+데이터셋은 한국어의 경우 센터에서 확보하고 있는 비정형 코퍼스 중 Manual Cleaning을 여러번 진행한 데이터셋과 NIKL 데이터셋의 비정형 코퍼스 일부를 사용하였습니다.
+영어의 경우 [RealNews](https://github.com/rowanz/grover/tree/master/realnews) 데이터셋을 사용하였습니다.
+데이터셋 구성은 아래와 같습니다.
 
 ### `ke`
 **Dataset size**: `92.02GiB`\
@@ -123,8 +183,9 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 'train': total **22,735,237** examples\
 'validation': total **22,619** examples
 
+<br>
 
-## models
+## Models
 
 ### Pretrained models
 
@@ -233,7 +294,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
     </tbody>
 </table>
 
-
+<br>
 
 ### Downstream models (Tensorflow saved model)
 
@@ -311,10 +372,17 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
     </tbody>
 </table>
 
+<br>
+<br>
 
 ## Downstream Tasks
 
 ### Tasks
+
+KE-T5에서 지원하는 모든 task들의 목록입니다.
+
+<br>
+<br>
 
 #### Korean
 | Task Name  | Input Format | Output Format | Task Type | Language |
@@ -331,6 +399,9 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 | ke_t5_nikl_summarization_topic  | `summarize_topic: {text}`  | `{summary}`  | Select topic sentences  | ko |
 | ke_t5_ted_multi_en_ko  | `translate en to ko: {text}`  | `{text}`  | Translation  | ko, en |
 | ke_t5_ted_multi_ko_en  | `translate ko to en: {text}`  | `{text}`  | Translation  | ko, en |
+
+<br>
+<br>
 
 #### English
 
@@ -890,9 +961,12 @@ answer: {sampled answer}
 </details>
 
 
+<br>
+<br>
 
 ### Mixture Tasks
-
+\
+Mixture Task는 여러 Task들의 묶음입니다. 
 
 | Name  | Tasks |
 | ------------- | ------------- |
@@ -907,87 +981,137 @@ answer: {sampled answer}
 
 
 ## Samples
+
+몇몇 Downstream Task들의 I/O 샘플입니다.
+해당 샘플을 생성한 모델은 아래와 같습니다.
+
 ### Model Spec
 Dataset: `ke.newslike`\
 Model Size: `small`\
 steps: `1M`
 
+<br>
+
 ### Summarization
 
 #### NIKL Topic sentences
 
-<details>
-<summary>Summarization (NIKL topic) (click)</summary>
+<br>
 
 `Input`
 ```
-summarize_topic: "온난화가 파미르 고원까지 덮쳤어요" 첫 주한 타지키스탄 대사 살로히딘, 산사태 상영회... "모두 각성해야" 지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 장면을 담은 동영상이 상영됐다. 이 행사를 마련한 키로모프 살로히딘 주한 타지키스탄 대사는 "한국인에게는 아직 낯선 타지키스탄이 '세계의 지붕' 파미르 고원을 품고 있는 나라라는 것, 그리고 지구온난화로 인해 파미르 고원이 아픔을 겪고 있다는 것을 알리고 싶었다"고 했다. 영상에는 협곡에서 시커먼 흙더미가 떠밀려오는 모습, 산 아래 밭과 가옥들이 순식간에 묻혀버리는 모습 등이 담겼다. 지구온난화의 영향으로 산 정상 부근의 얼음이 급속히 녹아든 것이 원인이다. 평균 고도 5000m에 이르는 파미르 고원은 히말라야와 힌두쿠시·톈산 산맥 등을 품고 있다. 지난 18일 서울 충무로 한국·중앙아시아 친선협회 사무실에서 만난 살로히딘 대사는 "국토의 93%가 산지인 우리나라는 잠재력이 무궁무진하다"며 '국가 세일즈'에 나섰다. "국민 대다수가 '산사람'이죠. 산에서 보석과 광물을 캐고, 수력으로 발전기를 돌립니다. 자원은 부족해도 선진 경제를 이룩한 한국이 우리의 성장 모델입니다. 앞으로 윈·윈 관계를 이룰 수 있을 겁니다." 파미르 고원 지역을 관할하는 바다흐 ⁇ 주(州)의 리요에프 누랄리 부주지사도 살로히딘 대사와 함께 만났다. 누랄리 부주지사는 새마을중앙회 초청 외국 공무원 행정 연수에 참여하기 위해 한국에 왔다. 두 사람은 "타지키스탄에서 산은 삶 그 자체"라고 했다. 누랄리 부주지사는 "이번 산사태로 학교와 병원, 도로 같은 기반 시설이 크게 파괴됐다"며 "아픔을 겪고 일어날 수 있도록 응원을 부탁한다. 그리고 지구온난화의 결과가 얼마나 무서운지 모두가 새롭게 경각심을 가졌으면 좋겠다"고 했다. 1991년 구소련의 붕괴로 독립한 타지키스탄은 다른 중앙아시아 국가처럼 한국을 '경제 발전의 교과서'로 삼고 있다. 지난 4월에는 에모말리 라흐몬 타지키스탄 대통령의 방한에 맞춰 서울에 대사관도 열었다.
+summarize_topic: "온난화가 파미르 고원까지 덮쳤어요" 첫 주한 타지키스탄 대사 살로히딘, 산사태 상영회... 
+"모두 각성해야" 지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 
+장면을 담은 동영상이 상영됐다. 이 행사를 마련한 키로모프 살로히딘 주한 타지키스탄 대사는 "한국인에게는 아직 
+낯선 타지키스탄이 '세계의 지붕' 파미르 고원을 품고 있는 나라라는 것, 그리고 지구온난화로 인해 파미르 고원이 
+아픔을 겪고 있다는 것을 알리고 싶었다"고 했다. 영상에는 협곡에서 시커먼 흙더미가 떠밀려오는 모습, 산 아래 
+밭과 가옥들이 순식간에 묻혀버리는 모습 등이 담겼다. 지구온난화의 영향으로 산 정상 부근의 얼음이 급속히 녹아든 
+것이 원인이다. 평균 고도 5000m에 이르는 파미르 고원은 히말라야와 힌두쿠시·톈산 산맥 등을 품고 있다. 지난 
+18일 서울 충무로 한국·중앙아시아 친선협회 사무실에서 만난 살로히딘 대사는 "국토의 93%가 산지인 우리나라는 
+잠재력이 무궁무진하다"며 '국가 세일즈'에 나섰다. "국민 대다수가 '산사람'이죠. 산에서 보석과 광물을 캐고, 
+수력으로 발전기를 돌립니다. 자원은 부족해도 선진 경제를 이룩한 한국이 우리의 성장 모델입니다. 앞으로 윈·윈 
+관계를 이룰 수 있을 겁니다." 파미르 고원 지역을 관할하는 바다흐 ⁇ 주(州)의 리요에프 누랄리 부주지사도 
+살로히딘 대사와 함께 만났다. 누랄리 부주지사는 새마을중앙회 초청 외국 공무원 행정 연수에 참여하기 위해 한국에 
+왔다. 두 사람은 "타지키스탄에서 산은 삶 그 자체"라고 했다. 누랄리 부주지사는 "이번 산사태로 학교와 병원, 
+도로 같은 기반 시설이 크게 파괴됐다"며 "아픔을 겪고 일어날 수 있도록 응원을 부탁한다. 그리고 지구온난화의 
+결과가 얼마나 무서운지 모두가 새롭게 경각심을 가졌으면 좋겠다"고 했다. 1991년 구소련의 붕괴로 독립한 
+타지키스탄은 다른 중앙아시아 국가처럼 한국을 '경제 발전의 교과서'로 삼고 있다. 지난 4월에는 에모말리 라흐몬 
+타지키스탄 대통령의 방한에 맞춰 서울에 대사관도 열었다.
 ```
 
 \
 `Target`
 ```
-지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 장면을 담은 동영상이 상영됐다. 지난 18일 서울 충무로 한국·중앙아시아 친선협회 사무실에서 만난 살로히딘 대사는 "국토의 93%가 산지인 우리나라는 잠재력이 무궁무진하다"며 '국가 세일즈'에 나섰다. 1991년 구소련의 붕괴로 독립한 타지키스탄은 다른 중앙아시아 국가처럼 한국을 '경제 발전의 교과서'로 삼고 있다.
+지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 장면을 담은 동영상이
+ 상영됐다. 지난 18일 서울 충무로 한국·중앙아시아 친선협회 사무실에서 만난 살로히딘 대사는 "국토의 93%가 
+산지인 우리나라는 잠재력이 무궁무진하다"며 '국가 세일즈'에 나섰다. 1991년 구소련의 붕괴로 독립한 타지키스탄은 
+다른 중앙아시아 국가처럼 한국을 '경제 발전의 교과서'로 삼고 있다.
+
 ```
 
 \
 `Prediction`
 ```
-지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 장면을 담은 동영상이 상영됐다. 이 행사를 마련한 키로모프 살로히딘 타지키스탄 대사는 "국토의 93%가 산지인 우리나라는 잠재력이 무궁무진하다"며 '국가 세일즈'에 나섰다. 1991년 구소련의 붕괴로 독립한 타지키스탄은 다른 중앙아시아 국가처럼 한국을 '경제 발전의 교과서'로 삼고 있다.
+지난 12일 서울 광희동에서 열린 타지키스탄 독립 24주년 기념행사에서 파미르 고원의 산사태 장면을 담은 동영상이 
+상영됐다. 이 행사를 마련한 키로모프 살로히딘 타지키스탄 대사는 "국토의 93%가 산지인 우리나라는 잠재력이 
+무궁무진하다"며 '국가 세일즈'에 나섰다. 1991년 구소련의 붕괴로 독립한 타지키스탄은 다른 중앙아시아 국가처럼 
+한국을 '경제 발전의 교과서'로 삼고 있다.
 ```
 
-</details>
-
+<br>
 
 #### NIKL Summary
 
-<details>
-<summary>Summarization (NIKL summary) (click)</summary>
 
 `Input`
 
 ```
-summarize_summary: ‘스페셜 원’, 그도 레알에선 평범했다. 모리뉴 감독 ‘시즌 뒤 사퇴’ 발표. 바르사에 밀려 라리가서 부진. 공언했던 챔스리그 우승 못해. 카시야스 등 선수들과 불화도. 새 감독엔 안첼로티·지단 거론. 그의 사전에 실패란 없는 듯했다. 가는 팀마다 승승장구했고, 우승트로피가 쌓여만 갔다. 2008년부터 2010년까지 이탈리아 세리에A 명문 인터밀란 사령탑으로 있으면서 ‘트레블’ 위업까지 달성했다. 스스로 ‘스페셜 원’이라고 했고, 사람들은 그를 앨릭스 퍼거슨 맨체스터 유나이티드 감독에 버금가는 명장 반열에 올려놨다. 그런 명성을 발판으로 스페인의 명문 레알 마드리드로 화려하게 이적했다. 그러나 레알 지휘봉을 잡고서는 그런 명성에 금이 가기 시작했다. 크리스티아누 호날두라는 걸출한 스타가 팀에 버티고 있었지만, 그보다 더 센 리오넬 메시가 포진한 FC바르셀로나의 기세에 밀려 라 리가와 코파 델 레이(스페인국왕컵), 스페인 수페르코파(슈퍼컵)에서 한번씩 우승하는 것에 그쳤다. 그가 취임하면서 공언했던 챔피언스리그 타이틀은 한번도 차지하지 못했다. 바르사와의 엘 클라시코에서도 열세를 면치 못했다. 조제 모리뉴(50) 레알 마드리드 감독이 결국 2012~2013 시즌 뒤 팀을 떠나게 됐다. 자신이 설정한 목표를 달성하지 못한 불명예 퇴진이나 마찬가지인 셈이다. 미국 <이에스피엔>(ESPN)은 이에 대해 그레이엄 헌터의 기고를 통해 “캡틴 카시야스와의 갈등을 불필요하게 피하지 못한 것은 모리뉴의 레알 통치 기간 볼썽사나운 상처로 남게 됐다. 카시야스의 32번째 생일에 이뤄진 모리뉴의 감독 사퇴는 카시야스에게 승리를 안겨준 것”이라고 평가했다. 플로렌티노 페레스 레알 회장은 20일 저녁 무렵(현지시각) 홈경기장인 산티아고 베르나베우에서 연 기자회견을 통해 “모리뉴 감독이 이번 시즌을 끝으로 팀을 떠나기로 했다. 구단과 모리뉴 감독의 합의에 의한 것”이라고 공식 발표했다. 페레스 회장은 “모리뉴 감독이 계속 팀을 이끌길 바랐지만 모리뉴 감독 스스로 레알을 최고의 팀으로 만들고자 하는 압박감이 심했다”고 설명했다. 그는 “모리뉴 감독이 ‘영국에선 축구 경기가 90분으로 끝나지만 스페인에선 한 경기가 일주일, 매일 24시간으로 연장된다’고 얘기했다”며 모리뉴 감독의 스트레스가 적지 않았다고 덧붙였다. 모리뉴 감독은 지난해 계약 기간을 2016년까지로 연장했지만 결국 성적 부진에다 카시야스 등 일부 선수들과의 불화설까지 겹쳐 중도하차하게 됐다. 페레스 회장은 “레알이 이전엔
+summarize_summary: ‘스페셜 원’, 그도 레알에선 평범했다. 모리뉴 감독 ‘시즌 뒤 사퇴’ 발표. 바르사에 밀려 
+라리가서 부진. 공언했던 챔스리그 우승 못해. 카시야스 등 선수들과 불화도. 새 감독엔 안첼로티·지단 거론. 그의 
+사전에 실패란 없는 듯했다. 가는 팀마다 승승장구했고, 우승트로피가 쌓여만 갔다. 2008년부터 2010년까지 
+이탈리아 세리에A 명문 인터밀란 사령탑으로 있으면서 ‘트레블’ 위업까지 달성했다. 스스로 ‘스페셜 원’이라고 했고, 
+사람들은 그를 앨릭스 퍼거슨 맨체스터 유나이티드 감독에 버금가는 명장 반열에 올려놨다. 그런 명성을 발판으로 
+스페인의 명문 레알 마드리드로 화려하게 이적했다. 그러나 레알 지휘봉을 잡고서는 그런 명성에 금이 가기 
+시작했다. 크리스티아누 호날두라는 걸출한 스타가 팀에 버티고 있었지만, 그보다 더 센 리오넬 메시가 포진한 
+FC바르셀로나의 기세에 밀려 라 리가와 코파 델 레이(스페인국왕컵), 스페인 수페르코파(슈퍼컵)에서 한번씩 
+우승하는 것에 그쳤다. 그가 취임하면서 공언했던 챔피언스리그 타이틀은 한번도 차지하지 못했다. 바르사와의 엘 
+클라시코에서도 열세를 면치 못했다. 조제 모리뉴(50) 레알 마드리드 감독이 결국 2012~2013 시즌 뒤 팀을 떠나게 
+됐다. 자신이 설정한 목표를 달성하지 못한 불명예 퇴진이나 마찬가지인 셈이다. 미국 <이에스피엔>(ESPN)은 이에 
+대해 그레이엄 헌터의 기고를 통해 “캡틴 카시야스와의 갈등을 불필요하게 피하지 못한 것은 모리뉴의 레알 통치 
+기간 볼썽사나운 상처로 남게 됐다. 카시야스의 32번째 생일에 이뤄진 모리뉴의 감독 사퇴는 카시야스에게 승리를 
+안겨준 것”이라고 평가했다. 플로렌티노 페레스 레알 회장은 20일 저녁 무렵(현지시각) 홈경기장인 산티아고 베르나베우에서 연 기자회견을 통해 “모리뉴 감독이 이번 시즌을 끝으로 팀을 떠나기로 했다. 구단과 모리뉴 감독의 
+합의에 의한 것”이라고 공식 발표했다. 페레스 회장은 “모리뉴 감독이 계속 팀을 이끌길 바랐지만 모리뉴 감독 
+스스로 레알을 최고의 팀으로 만들고자 하는 압박감이 심했다”고 설명했다. 그는 “모리뉴 감독이 ‘영국에선 축구 
+경기가 90분으로 끝나지만 스페인에선 한 경기가 일주일, 매일 24시간으로 연장된다’고 얘기했다”며 모리뉴 감독의 
+스트레스가 적지 않았다고 덧붙였다. 모리뉴 감독은 지난해 계약 기간을 2016년까지로 연장했지만 결국 성적 
+부진에다 카시야스 등 일부 선수들과의 불화설까지 겹쳐 중도하차하게 됐다. 페레스 회장은 “레알이 이전엔
 ```
 
 \
 `Target`
 ```
-레알 마드리드의 조제 모리뉴 감독이 2012-2013 시즌을 끝으로 팀을 떠난다. 모리뉴 감독은 성적 부진에 일부 선수들과의 불화설이 겹치면서 중도하차하게 됐다. 팀의 차기 사령탑으로는 카를로 안첼로티 감독이 거론되고 있다.
+레알 마드리드의 조제 모리뉴 감독이 2012-2013 시즌을 끝으로 팀을 떠난다. 모리뉴 감독은 성적 부진에 일부 
+선수들과의 불화설이 겹치면서 중도하차하게 됐다. 팀의 차기 사령탑으로는 카를로 안첼로티 감독이 거론되고 있다.
 ```
 
 \
 `Prediction`
 ```
-조제 모리뉴 레알 마드리드 감독이 시즌 뒤 팀을 떠나게 돼 자신의 목표를 달성하지 못한 불명예 퇴진이나 마찬가지다. 모리뉴 감독은 지난해 계약 기간을 2016년까지로 연장했지만 결국 성적 부진에다 일부 선수들과의 불화설까지 겹쳐 중도하차하게 됐다. 레알 차기 사령탑으로는 카를로 안첼로티(54) 파리 생제르맹(프랑스) 감독이 거론되고 있다.
+조제 모리뉴 레알 마드리드 감독이 시즌 뒤 팀을 떠나게 돼 자신의 목표를 달성하지 못한 불명예 퇴진이나 
+마찬가지다. 모리뉴 감독은 지난해 계약 기간을 2016년까지로 연장했지만 결국 성적 부진에다 일부 선수들과의 
+불화설까지 겹쳐 중도하차하게 됐다. 레알 차기 사령탑으로는 카를로 안첼로티(54) 파리 생제르맹(프랑스) 감독이 
+거론되고 있다.
 ```
 
-</details>
 
 
 #### CNN/DM
 
-<details>
-<summary>Summarization (CNN/DM) (click)</summary>
-
 `Input`
 ```
-summarize: Dougie Freedman is on the verge of agreeing a new two-year deal to remain at Nottingham Forest. Freedman has stabilised Forest since he replaced cult hero Stuart Pearce and the club's owners are pleased with the job he has done at the City Ground. Dougie Freedman is set to sign a new deal at Nottingham Forest. Freedman has impressed at the City Ground since replacing Stuart Pearce in February. They made an audacious attempt on the play-off places when Freedman replaced Pearce but have tailed off in recent weeks. That has not prevented Forest's ownership making moves to secure Freedman on a contract for the next two seasons.
+summarize: Dougie Freedman is on the verge of agreeing a new two-year deal to remain at Nottingham 
+Forest. Freedman has stabilised Forest since he replaced cult hero Stuart Pearce and the club's 
+owners are pleased with the job he has done at the City Ground. Dougie Freedman is set to sign a new 
+deal at Nottingham Forest. Freedman has impressed at the City Ground since replacing Stuart Pearce in 
+February. They made an audacious attempt on the play-off places when Freedman replaced Pearce but 
+have tailed off in recent weeks. That has not prevented Forest's ownership making moves to secure 
+Freedman on a contract for the next two seasons.
 ```
 
 \
 `Target`
 ```
-Nottingham Forest are close to extending Dougie Freedman's contract . The Forest boss took over from former manager Stuart Pearce in February . Freedman has since lead the club to ninth in the Championship .
+Nottingham Forest are close to extending Dougie Freedman's contract . The Forest boss took over from 
+ormer manager Stuart Pearce in February . Freedman has since lead the club to ninth in the 
+hampionship .
 ```
 
 \
 `Prediction`
 ```
-Dougie Freedman set to sign a two-year deal at Nottingham Forest . Freedman replaced Stuart Pearce in February . Forest have made an audacious bid on the play-off places .
+Dougie Freedman set to sign a two-year deal at Nottingham Forest . Freedman replaced Stuart Pearce in 
+February . Forest have made an audacious bid on the play-off places .
 ```
-
-</details>
 
 
 ### Translation
@@ -1009,6 +1133,13 @@ We aim is not to marginalize any child because of the cost or the access .
 
 
 ## Performance
+
+Downstream task들의 성능입니다. Mixture task들로 성능을 측정하였으며 시간 관계상 튜닝은 하지 않았습니다. \
+성능을 높이기 위해서는 mixture task가 아닌 개별 task로 학습을 진행하십시오. (예를 들어 NIKL CoLA의 경우 개별 task로 학습을 진행할 경우 튜닝을 하지 않아도 small model에서 약 20의 성능이 나옵니다.)
+
+
+Summarization과 Extractive QA의 경우 입력이 모델들의 최대 시퀀스 길이인 512를 넘을 수가 있습니다. 이 경우 넘는 부분을 그냥 버리고 학습과 성능측정을 진행했습니다. 즉, 요약의 경우 512 토큰이 넘는 부분의 경우 요약이 되지 않고, extractive QA의 question에 대한 정답이 512 토큰을 초과하는 부분에 존재하면 답을 찾을 수 없습니다. 이러한 경우를 처리하여 성능을 높이기 위해서는 직접 학습 프로그램을 만들어 사용하셔야 합니다. (e.g. Extractive QA의 경우, BERT에서처럼 document span으로 분리하여 해당 span에 정답이 있는지 없는지로 학습.)
+
 
 ### Korean
 
@@ -1926,17 +2057,18 @@ Task: `ke_t5_ko_en_summary_proportional` for **CNN/DM**, `ke_t5_nikl_summary_mix
 
 
 ## bibtex
+
+KE-T5를 이용하여 연구를 진행하실 경우 아래와 같이 인용해주시길 바랍니다.
 ```
 @misc{ke_t5,
     author       = {KETI AIRC},
-    title        = {{Korean English T5}},
+    title        = {KE-T5: Korean English T5},
     month        = mar,
     year         = 2021,
-    version      = {1.0},
     url          = {https://github.com/AIRC-KETI/ke-t5}
 }
 ```
 
 ## Note
 
-**TFRC-supported**
+KE-T5는 **TFRC** 프로그램의 지원으로 학습되었습니다.
