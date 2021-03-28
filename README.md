@@ -198,7 +198,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <th>Size</th>
             <th>steps</th>
             <th>Download URL(Tensorflow)</th>
-            <th>Download URL(Pytorch)</th>
+            <th>Download URL(Pytorch-Huggingface)</th>
         </tr>
     </thead>
     <tbody>
@@ -207,7 +207,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>small</td>
             <td> 1M</td>
             <td>  <a href='https://drive.google.com/file/d/1RPq7zZWH0JfkA5Qq79KxEHgQ1-OmhaKD/view?usp=sharing'> Download </a>   </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1Vl1s-yMyUlTbXcMfPcM2uVX2NHogwTTf/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 3M </td>
@@ -218,7 +218,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>base</td>
             <td> 600K </td>
             <td>  <a href='https://drive.google.com/file/d/1bkHRcf7gsEUbE0LeayBkxfE2o17wGn76/view?usp=sharing'> Download </a>  </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1sqAxKHz_7DnDoLvdidgtpD8yKRAW7MSW/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 1M </td>
@@ -229,7 +229,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>large</td>
             <td> 600K </td>
             <td>  <a href='https://drive.google.com/file/d/1lCoYijBQx3fh0gj1rKzvjpIU-To-SasQ/view?usp=sharing'> Download </a>  </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/16y6MRDrqz0F_og3q5jKJYN6YUuZRa79G/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 1M </td>
@@ -241,7 +241,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>small</td>
             <td> 1M</td>
             <td>  <a href='https://drive.google.com/file/d/1OWvbRlTctQtrzk5iQpUJMprTWsObqtgD/view?usp=sharing'> Download </a>   </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1w7jXuxPrryNjkb9WL-F_mCjiyPPC51dG/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 3M </td>
@@ -252,7 +252,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>base</td>
             <td> 600K </td>
             <td>  <a href='https://drive.google.com/file/d/1IqBOqNWYLkyPep84Aw7xBOL4X9W1x0bY/view?usp=sharing'> Download </a>  </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1id8IEQSwDFK-INygh-vMEvRpdcxgxz9K/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 1M </td>
@@ -263,7 +263,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>large</td>
             <td> 600K </td>
             <td>  <a href='https://drive.google.com/file/d/1_R9cQjUJkIC6GVLy1hOTUJQyldJTxlWo/view?usp=sharing'> Download </a>  </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/130NiLksmrMfiIhXZzIunyL6DmOpg6OGP/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 1M </td>
@@ -275,7 +275,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>small</td>
             <td> 1M</td>
             <td>  <a href='https://drive.google.com/file/d/1V3usXySS7JUnFSACvvR8kN-XBN5C6cWF/view?usp=sharing'> Download </a>   </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1-4mALpy_k1GCrTE2e7afhuW_o7bJtx5P/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 3M </td>
@@ -286,7 +286,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=2>base</td>
             <td> 600K </td>
             <td>  <a href='https://drive.google.com/file/d/1LCvR_rC_cmouTy1720z48BC9Gkmg3EyK/view?usp=sharing'> Download </a>  </td>
-            <td> - </td>
+            <td> <a href='https://drive.google.com/file/d/1gvZWEwziNUVrRugJ9AkzkaRqi4fsMhKW/view?usp=sharing'> Download </a> </td>
         </tr>
         <tr>
             <td> 1M </td>
