@@ -7,7 +7,6 @@ Vocabulary는 64,000개의 sub-word token으로 이루어져 있으며, Google�
 사전학습에 사용된 비정형 코퍼스에 대한 구성과 정보는 [Datasets](#datasets)을 참고하시기 바랍니다.
 
 <br>
-<br>
 
 ## Fine-tuning
 
@@ -75,6 +74,8 @@ python3 -m t5.models.mesh_transformer_main \
         --t5_tfds_data_dir="${DATA_DIR}" \
         --module_import="ke_t5.tasks"
 ```
+
+<br>
 
 ## How to use a saved model (exported tensorflow model)
 
@@ -148,6 +149,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 
 ```
 
+<br>
 
 ## Datasets
 
@@ -373,7 +375,6 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 </table>
 
 <br>
-<br>
 
 ## Downstream Tasks
 
@@ -381,7 +382,6 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 
 KE-T5에서 지원하는 모든 task들의 목록입니다.
 
-<br>
 <br>
 
 #### Korean
@@ -400,7 +400,6 @@ KE-T5에서 지원하는 모든 task들의 목록입니다.
 | ke_t5_ted_multi_en_ko  | `translate en to ko: {text}`  | `{text}`  | Translation  | ko, en |
 | ke_t5_ted_multi_ko_en  | `translate ko to en: {text}`  | `{text}`  | Translation  | ko, en |
 
-<br>
 <br>
 
 #### English
@@ -962,7 +961,6 @@ answer: {sampled answer}
 
 
 <br>
-<br>
 
 ### Mixture Tasks
 \
@@ -980,6 +978,8 @@ Mixture Task는 여러 Task들의 묶음입니다.
 | `ke_t5_all_proportional`, `ke_t5_ko_en_qa_equal`  | all tasks |
 
 
+<br>
+
 ## Samples
 
 몇몇 Downstream Task들의 I/O 샘플입니다.
@@ -994,9 +994,9 @@ steps: `1M`
 
 ### Summarization
 
-#### NIKL Topic sentences
-
 <br>
+
+#### NIKL Topic sentences
 
 `Input`
 ```
@@ -1083,7 +1083,7 @@ FC바르셀로나의 기세에 밀려 라 리가와 코파 델 레이(스페인�
 거론되고 있다.
 ```
 
-
+<br>
 
 #### CNN/DM
 
@@ -1113,6 +1113,7 @@ Dougie Freedman set to sign a two-year deal at Nottingham Forest . Freedman repl
 February . Forest have made an audacious bid on the play-off places .
 ```
 
+<br>
 
 ### Translation
 
@@ -1131,6 +1132,7 @@ We aim is not to marginalize any child because of the cost or the access .
 우리의 목표는 어떤 아이도 뒤처지지 않는 것입니다 . 원조나 지원에 의해서가 아니라요 .
 ```
 
+<br>
 
 ## Performance
 
@@ -1785,10 +1787,10 @@ Task: `ke_t5_ko_en_qa_equal`
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td>  </td> <!--SQuAD EM-->
-            <td> </td> <!--SQuAD F1-->
-            <td> </td> <!--KorQuAD 1.1 EM-->
-            <td> </td> <!--KorQuAD 1.1 F1-->
+            <td> 69.52 </td> <!--SQuAD EM-->
+            <td> 80.29 </td> <!--SQuAD F1-->
+            <td> 85.4 </td> <!--KorQuAD 1.1 EM-->
+            <td> 91.35 </td> <!--KorQuAD 1.1 F1-->
         </tr>
     </tbody>
 </table>
@@ -1900,12 +1902,12 @@ Task: `ke_t5_ko_translation_proportional`
         <tr>
             <td>base</td>
             <td> 1M </td>
-            <td> </td> <!--en->ko Rouge-1-->
-            <td> </td> <!--en->ko Rouge-2-->
-            <td> </td> <!--en->ko Rouge-L-->
-            <td> </td> <!--ko->en Rouge-1-->
-            <td> </td> <!--ko->en Rouge-2-->
-            <td> </td> <!--ko->en Rouge-L-->
+            <td> 11.4 </td> <!--en->ko Rouge-1-->
+            <td> 2.481 </td> <!--en->ko Rouge-2-->
+            <td> 11.25 </td> <!--en->ko Rouge-L-->
+            <td> 42.43 </td> <!--ko->en Rouge-1-->
+            <td> 17.45 </td> <!--ko->en Rouge-2-->
+            <td> 38.25 </td> <!--ko->en Rouge-L-->
         </tr>
     </tbody>
 </table>
@@ -2041,15 +2043,15 @@ Task: `ke_t5_ko_en_summary_proportional` for **CNN/DM**, `ke_t5_nikl_summary_mix
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td> </td> <!--CNN/DM Rouge-1-->
-            <td> </td> <!--CNN/DM Rouge-2-->
-            <td> </td> <!--CNN/DM Rouge-L-->
+            <td> 39.3 </td> <!--CNN/DM Rouge-1-->
+            <td> 17.94 </td> <!--CNN/DM Rouge-2-->
+            <td> 36.66 </td> <!--CNN/DM Rouge-L-->
             <td> 37.93 </td> <!--NIKL summary Rouge-1-->
             <td> 17.74 </td> <!--NIKL summary Rouge-2-->
-            <td> </td> <!--NIKL summary Rouge-L-->
+            <td> 36.36 </td> <!--NIKL summary Rouge-L-->
             <td> 48.71 </td> <!--NIKL topic Rouge-1-->
             <td> 33.85 </td> <!--NIKL topic Rouge-2-->
-            <td> </td> <!--NIKL topic Rouge-L-->
+            <td> 48.15 </td> <!--NIKL topic Rouge-L-->
         </tr>
     </tbody>
 </table>
