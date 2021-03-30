@@ -153,7 +153,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 
 ## Datasets
 
-데이터셋은 한국어의 경우 센터에서 확보하고 있는 비정형 코퍼스 중 Manual Cleaning을 여러번 진행한 데이터셋과 NIKL 데이터셋의 비정형 코퍼스 일부를 사용하였습니다.
+데이터셋은 한국어의 경우 센터에서 확보하고 있는 비정형 코퍼스 중 Manual Cleaning을 여러번 진행한 데이터셋과 NIKL 데이터셋(**국립 국어원 모두의 말뭉치**)의 비정형 코퍼스 일부를 사용하였습니다.
 영어의 경우 [RealNews](https://github.com/rowanz/grover/tree/master/realnews) 데이터셋을 사용하였습니다.
 데이터셋 구성은 아래와 같습니다.
 
@@ -2074,3 +2074,5 @@ KE-T5를 이용하여 연구를 진행하실 경우 아래와 같이 인용해�
 ## Note
 
 KE-T5는 **TFRC** 프로그램의 지원으로 학습되었습니다.
+KE-T5의 한국어 요약 학습에는 국립국어원의 **모두의 말뭉치-문서 요약 말뭉치**가 사용되었습니다.
+KE-T5의 ke, ko 사전학습에 국립국어원 **모두의 말뭉치**가 사용되었습니다.
