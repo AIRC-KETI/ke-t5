@@ -262,7 +262,6 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td rowspan=3>ke.newslike</td>
             <td>small</td>
             <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1RWKefyXecgYO1_T-XqV_6ddbV2iXp6n0/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
             <td>  <a href='https://drive.google.com/file/d/1lw4a4d3oTHrklvIH7PP7dLFxWJPkC2yl/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
             <td>  <a href='https://drive.google.com/file/d/1YZyq4eVM_yduSrlpZhzkQ9wwtk-iVn85/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
