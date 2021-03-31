@@ -1,3 +1,6 @@
+# Note
+*저작권 문제로 인하여 모두의 말뭉치를 사용한 사전학습 모델은 모두 공유 중지하기로 결정하였습니다.*
+
 # KE-T5: Korean-English T5
 
 KE-T5는 [Text-to-Text Transfer Transformer](https://arxiv.org/abs/1910.10683) 모델을 한국어와 영어 코퍼스를 이용하여 사전학습한 모델입니다.
@@ -82,6 +85,7 @@ python3 -m t5.models.mesh_transformer_main \
 Pre-trained 모델의 체크포인트뿐만 아니라 일부 Downstream tasks의 saved model도 공개했습니다.\
 Tensorflow saved 모델은 `tensorflow`와 `tensorflow_text`가 설치되어 있으면 바로 사용하실 수 있습니다.
 아래 예는 python에서 saved model을 사용하는 방법이며, `ke_t5_nikl_summary_mixture_equal` task를 다운받았다고 가정하고 있습니다.
+(*현재 모두의 말뭉치는 공유를 위한 공문 작업이 필요하여 공유를 중단하였습니다. 모두의 말뭉치를 직접 다운 받아서 테스트 하시거나 모두의 말뭉치를 사용하지 않은 다른 태스크를 이용하여 테스트해보시길 부탁드립니다.*)
 
 `ke_t5_nikl_summary_mixture_equal` task는 `ke_t5_nikl_summarization_summary`와 `ke_t5_nikl_summarization_topic`의 mixture tasks이며, 각각 `summarize_topic`과 `summarize_summary`로 입력 텍스트가 시작합니다.
 `ke_t5_nikl_summarization_summary`은 사람이 요약한 데이터를 이용하여 학습하며, `ke_t5_nikl_summarization_topic`은 topic sentences를 생성하도록 학습됩니다.
@@ -203,40 +207,6 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
     </thead>
     <tbody>
         <tr>
-            <td rowspan=6>ke</td>
-            <td rowspan=2>small</td>
-            <td> 1M</td>
-            <td>  <a href='https://drive.google.com/file/d/1RPq7zZWH0JfkA5Qq79KxEHgQ1-OmhaKD/view?usp=sharing'> Download </a>   </td>
-            <td> <a href='https://drive.google.com/file/d/1Vl1s-yMyUlTbXcMfPcM2uVX2NHogwTTf/view?usp=sharing'> Download </a> </td>
-        </tr>
-        <tr>
-            <td> 3M </td>
-            <td> TODO </td>
-            <td> - </td>
-        </tr>
-        <tr>
-            <td rowspan=2>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1bkHRcf7gsEUbE0LeayBkxfE2o17wGn76/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1sqAxKHz_7DnDoLvdidgtpD8yKRAW7MSW/view?usp=sharing'> Download </a> </td>
-        </tr>
-        <tr>
-            <td> 1M </td>
-            <td> TODO </td>
-            <td> - </td>
-        </tr>
-        <tr>
-            <td rowspan=2>large</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1lCoYijBQx3fh0gj1rKzvjpIU-To-SasQ/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/16y6MRDrqz0F_og3q5jKJYN6YUuZRa79G/view?usp=sharing'> Download </a> </td>
-        </tr>
-        <tr>
-            <td> 1M </td>
-            <td> TODO </td>
-            <td> - </td>
-        </tr>
-        <tr>
             <td rowspan=6>ke.newslike</td>
             <td rowspan=2>small</td>
             <td> 1M</td>
@@ -270,29 +240,6 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <td> TODO </td>
             <td> - </td>
         </tr>
-        <tr>
-            <td rowspan=6>ko</td>
-            <td rowspan=2>small</td>
-            <td> 1M</td>
-            <td>  <a href='https://drive.google.com/file/d/1V3usXySS7JUnFSACvvR8kN-XBN5C6cWF/view?usp=sharing'> Download </a>   </td>
-            <td> <a href='https://drive.google.com/file/d/1-4mALpy_k1GCrTE2e7afhuW_o7bJtx5P/view?usp=sharing'> Download </a> </td>
-        </tr>
-        <tr>
-            <td> 3M </td>
-            <td> TODO </td>
-            <td> - </td>
-        </tr>
-        <tr>
-            <td rowspan=2>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1LCvR_rC_cmouTy1720z48BC9Gkmg3EyK/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1gvZWEwziNUVrRugJ9AkzkaRqi4fsMhKW/view?usp=sharing'> Download </a> </td>
-        </tr>
-        <tr>
-            <td> 1M </td>
-            <td> TODO </td>
-            <td> - </td>
-        </tr>
     </tbody>
 </table>
 
@@ -306,34 +253,11 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
             <th>Dataset</th>
             <th>Size</th>
             <th>steps</th>
-            <th>ke_t5_nikl_summary_mixture_equal</th>
             <th>ke_t5_ko_en_qa_equal</th>
             <th>ke_t5_ko_translation_proportional</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td rowspan=3>ke</td>
-            <td>small</td>
-            <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1Eyew2FpBDLXceP4sCeVovAb_D1ofjuXM/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1TFcfr-10_Zhppg5mWTXkBKSLi-RPaKbC/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1fC33A4WiNZOpjJ1mL7WE0p2ZSg_Xxw0i/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
-        </tr>
-        <tr>
-            <td>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1rqH5Vp3C1AOmH_sqBaqVjQ3MWpineWS4/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1fURARZ8kqwtOdVyRhgzDdCcSxxsqa46c/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1A_ce8i1E2AEFdIV0DzhRwSrNGwSey9Ny/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
-        </tr>
-        <tr>
-            <td>large</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/11qWY8vWaDaU7JXQVInrVVxZjWXPRPrMV/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1OQVM6DJQNlpOl41YI711T4OcrI7WRKn2/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1SurwIHi0G4TkkTyBuWGqDc5gXQ_UVq4t/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
-        </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
             <td>small</td>
@@ -345,31 +269,14 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1wwOgEonOzR9hZUIQvyWL0YXy6k6Utepk/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
             <td>  <a href='https://drive.google.com/file/d/1tmeF09ezh3Qsco0WtBP25f4Q89p30Nz8/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
             <td>  <a href='https://drive.google.com/file/d/1iK9HLR6TXKGwaFqFhzDaVKjJVzaDmxkx/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1A-31M-UELtDizmHjfpGdjgEqSMCYDiut/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
             <td>  <a href='https://drive.google.com/file/d/1oURcluLJ778N_rD8mnLh1oLcZqQBlhLZ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
             <td>  <a href='https://drive.google.com/file/d/1PIRrmQEg2W_OUKdwWu2T5RKq30xbgcba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
-        </tr>
-        <tr>
-            <td rowspan=3>ko</td>
-            <td>small</td>
-            <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1Vx3XY6ORTtst_eVhQ3rSdHO6mozwYICz/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1Jb7tVmfhoKQXx58Oh3rZE9On5lfKgEEu/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/11trFdNAsavnLm7R3I9PTuulWjXakQ4uB/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
-        </tr>
-        <tr>
-            <td>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/14GymkunvDhDtnCJPFHHGdtv-PadRQPPf/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1e9TR9baJXt4vuj4ieN2rPgbjfqiQVXuv/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1t4wsyYBqtB7wrN_D4oDRfIXLctJNmEba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
     </tbody>
 </table>
