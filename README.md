@@ -161,7 +161,7 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 **Dataset size**: `92.02GiB`\
 **Corpus type**: `ko` (Newspaper, Written, Web text, Messenger, Spoken) `en` (Newspaper)\
 **Split**\
-'train': total **36,534,568** examples (ko: 22,734,730, en: 13,799,838)\
+'train': total **39,344,633** examples (ko: 25,544,795, en: 13,799,838)\
 'validation': total **39,283** examples (ko: 25,420, en: 13,863)
 
 ### `ke.newslike`
@@ -2082,6 +2082,5 @@ KE-T5의 ke, ko 사전학습에 국립국어원 **모두의 말뭉치**가 사�
 
 ## Acknowledgement
 
-```
+
 This work was partly supported by  National IT Industry Promotion Agency (NIPA) grant funded by the Korea government(MSIT) (S0316-21-1002, Development of artificial intelligence based empathy service technology for emotional stability).
-```
