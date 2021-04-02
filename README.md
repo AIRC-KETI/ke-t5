@@ -2078,3 +2078,10 @@ KE-T5를 이용하여 연구를 진행하실 경우 아래와 같이 인용해�
 KE-T5는 **TFRC** 프로그램의 지원으로 학습되었습니다. \
 KE-T5의 한국어 요약 학습에는 국립국어원의 **모두의 말뭉치-문서 요약 말뭉치**가 사용되었습니다. \
 KE-T5의 ke, ko 사전학습에 국립국어원 **모두의 말뭉치**가 사용되었습니다.
+
+
+## Acknowledgement
+
+```
+This work was partly supported by  National IT Industry Promotion Agency (NIPA) grant funded by the Korea government(MSIT) (S0316-21-1002, Development of artificial intelligence based empathy service technology for emotional stability).
+```
