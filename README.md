@@ -32,12 +32,13 @@ datasets 폴더에 있는 script로 데이터셋을 생성하고 Bucket에 복�
 
 ### Run downstream tasks on your TPU
 ```bash
+export PROJECT_ID=your_project_id
 export TPU_NAME=your_tpu_name
 export ZONE=your_project_zone
 export TPU_SIZE=v3-8
 
 # create TPU
-ctpu up --name=$TPU_NAME --project=self-supervised-training \
+ctpu up --name=$TPU_NAME --project=$PROJECT_ID \
 --zone=$ZONE --tpu-size=$TPU_SIZE --tf-version=2.4.1 --tpu-only --noconf
 
 export PROJECT=your_project_name
