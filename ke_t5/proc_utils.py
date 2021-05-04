@@ -4,7 +4,7 @@ import collections
 import tensorflow as tf
 from t5.data import preprocessors
 from t5.data import postprocessors
-from t5.seqio.utils import map_over_dataset
+from seqio.utils import map_over_dataset
 from t5.evaluation import metrics
 import t5.data.glue_utils
 
