@@ -192,6 +192,18 @@ print([out.decode('utf-8') for out in result['outputs'].numpy()])
 
 ### Pretrained models
 
+HuggingFace 모델 허브에 모델이 추가되어 사용이 가능합니다. \
+Huggingface TFT5ForConditionalGeneration, T5ForConditionalGeneration를 사용하실 경우 아래 코드와 같이 사용하시면 됩니다.
+
+```python
+from transformers import T5Tokenizer, T5ForConditionalGeneration
+
+model_name = 'KETI-AIR/ke-t5-base'
+tokenizer = T5Tokenizer.from_pretrained(model_name)
+model = T5ForConditionalGeneration.from_pretrained(model_name)
+```
+
+
 <table>
     <thead>
         <tr>
