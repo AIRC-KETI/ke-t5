@@ -10,7 +10,7 @@ Vocabulary는 64,000개의 sub-word token으로 이루어져 있으며, Google�
 
 ## Fine-tuning
 
-KE-T5를 이용하여 Downstream task를 학습하기 위해서는 먼저 pre-trained model을 다운 받아야 합니다. [pre-trained models](#pretrained-models)에서 다운 받으실 수 있습니다.\
+KE-T5를 이용하여 Downstream task를 학습하기 위해서는 먼저 pre-trained model을 다운 받아야 합니다. [pre-trained models](#pretrained-models)에서 다운 받으실 수 있습니다
 
 이 섹션에서는 [Google Cloud Platform](https://cloud.google.com/)에서 TPU를 이용하여 학습하는 방법만 설명합니다. GPU에서 사용하실 경우 [T5 github](https://github.com/google-research/text-to-text-transfer-transformer#gpu-usage)에서 설명하듯이 [gin-config](https://github.com/google/gin-config)의 `utils.run.mesh_devices`와 `utils.run.mesh_shape` parameter를 오버라이드 해주시면 됩니다.\
 [TFRC](https://www.tensorflow.org/tfrc)를 이용하시면 TPU를 한달간 무료로 사용하실 수 있습니다.
