@@ -446,8 +446,11 @@ KE-T5에서 지원하는 모든 task들의 목록입니다.
 | ke_t5_nikl_summarization  | `summarize: {text}`  | `{summary}` | Summarization  | ko |
 | ke_t5_nikl_summarization_summary  | `summarize_summary: {text}`  | `{summary}`  | Summarization  | ko |
 | ke_t5_nikl_summarization_topic  | `summarize_topic: {text}`  | `{summary}`  | Select topic sentences  | ko |
-| ke_t5_ted_multi_en_ko  | `translate en to ko: {text}`  | `{text}`  | Translation  | ko, en |
-| ke_t5_ted_multi_ko_en  | `translate ko to en: {text}`  | `{text}`  | Translation  | ko, en |
+| klue_tc_gen  | `klue_tc title: {text}`  | `{topic}`  | Select topic  | ko |
+| klue_nli_gen  | `klue_nli premise: {premise} hypothesis: {hypothesis}`  | `entailment` or `neutral` or `contradiction`  | Classification  | ko |
+| klue_sts_gen  | `klue_sts sentence1: {sentence1} sentence2: {sentence2}`  | `{score}` e.g. `1.4`  | Predict similarity score  | ko |
+| klue_re_gen  | `klue_re text: ~~~*{subject}*~~~#{object}#~~`  | `{relation}`  | Select relation  | ko |
+| klue_mrc_gen  | `klue_mrc question: {question} context: {article}`  | `{answer}`  | Extractive QA  | ko |
 
 <br>
 

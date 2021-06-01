@@ -6,7 +6,8 @@ from ke_t5.proc_utils import preprocess_korquad
 from ke_t5.proc_utils import get_kor_copora_preprocess_fn, get_kor_copora_postprocess_fn, get_kor_corpora_metric
 import functools
 
-
+import seqio
+import tensorflow as tf
 import t5.data
 from t5.evaluation import metrics
 import tensorflow_datasets as tfds
@@ -449,3 +450,300 @@ t5.data.MixtureRegistry.add(
     "ke_t5_all_equal",
     _all_tasks,
     default_rate=1.0)
+
+
+
+from ke_t5.proc_utils import KLUE_META
+from ke_t5.proc_utils import (
+    base_preproc_for_classification, 
+    base_preproc_for_regression, 
+    re_preproc_for_classification,
+    preprocess_quad,
+    string_label_to_class_id,
+    string_to_float)
+
+GENERATIVE_OUTPUT_FEATURES = {
+    "inputs": seqio.Feature(
+        vocabulary=DEFAULT_VOCAB, add_eos=False, required=False, dtype=tf.int32),
+    "targets": seqio.Feature(
+        vocabulary=DEFAULT_VOCAB, add_eos=True, dtype=tf.int32)
+}
+
+# CLASSIFICATION_OUTPUT_FEATURES = {
+#     "inputs": seqio.Feature(
+#         vocabulary=DEFAULT_VOCAB, add_eos=False, required=False, dtype=tf.int32)
+# }
+
+# ============ KLUE topic classification: Generative ============
+seqio.TaskRegistry.add(
+    "klue_tc_gen",
+    seqio.TfdsDataSource(tfds_name="klue/tc:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "title": "title",
+                "label": "label",
+            }),
+        functools.partial(
+            base_preproc_for_classification,
+            benchmark_name='klue_tc',
+            input_keys=['title'],
+            label_names=KLUE_META['tc_classes'],
+            with_feature_key=True,
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=functools.partial(
+            string_label_to_class_id,
+            label_classes=KLUE_META['tc_classes'],
+        ),
+    metric_fns=[metrics.accuracy],
+)
+
+# ============ KLUE topic classification: Classifier ============
+# seqio.TaskRegistry.add(
+#     "klue_tc",
+#     seqio.TfdsDataSource(tfds_name="klue/tc:1.0.0"),
+#     preprocessors=[
+#         functools.partial(
+#             seqio.preprocessors.rekey, 
+#             key_map={
+#                 "id": "guid",
+#                 "title": "title",
+#                 "label": "label",
+#             }),
+#         functools.partial(
+#             base_preproc_for_classification,
+#             benchmark_name='klue_tc',
+#             input_keys=['title'],
+#             label_names=None,
+#             with_feature_key=True,
+#         ),
+#         seqio.preprocessors.tokenize, 
+#         seqio.preprocessors.append_eos
+#     ],
+#     output_features=CLASSIFICATION_OUTPUT_FEATURES,
+# )
+
+# ============ KLUE NLI: Generative ============
+seqio.TaskRegistry.add(
+    "klue_nli_gen",
+    seqio.TfdsDataSource(tfds_name="klue/nli:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "premise": "premise",
+                "hypothesis": "hypothesis",
+                "label": "gold_label",
+            }),
+        functools.partial(
+            base_preproc_for_classification,
+            benchmark_name='klue_nli',
+            input_keys=['premise', 'hypothesis'],
+            label_names=KLUE_META['nli_classes'],
+            with_feature_key=True,
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=functools.partial(
+            string_label_to_class_id,
+            label_classes=KLUE_META['nli_classes'],
+        ),
+    metric_fns=[metrics.accuracy],
+)
+
+# ============ KLUE NLI: Classifier ============
+# seqio.TaskRegistry.add(
+#     "klue_nli",
+#     seqio.TfdsDataSource(tfds_name="klue/nli:1.0.0"),
+#     preprocessors=[
+#         functools.partial(
+#             seqio.preprocessors.rekey, 
+#             key_map={
+#                 "id": "guid",
+#                 "premise": "premise",
+#                 "hypothesis": "hypothesis",
+#                 "label": "gold_label",
+#             }),
+#         functools.partial(
+#             base_preproc_for_classification,
+#             benchmark_name='klue_nli',
+#             input_keys=['premise', 'hypothesis'],
+#             label_names=None,
+#             with_feature_key=True,
+#         ),
+#         seqio.preprocessors.tokenize, 
+#         seqio.preprocessors.append_eos
+#     ],
+#     output_features=CLASSIFICATION_OUTPUT_FEATURES,
+# )
+
+# ============ KLUE STS: Generative ============
+seqio.TaskRegistry.add(
+    "klue_sts_gen",
+    seqio.TfdsDataSource(tfds_name="klue/sts:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "sentence1": "sentence1",
+                "sentence2": "sentence2",
+                "label": "label",
+            }),
+        functools.partial(
+            base_preproc_for_regression,
+            benchmark_name='klue_sts',
+            input_keys=['sentence1', 'sentence2'],
+            with_feature_key=True,
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=string_to_float,
+    metric_fns=[metrics.pearson_corrcoef, metrics.spearman_corrcoef],
+)
+
+# ============ KLUE STS: Regressor ============
+# seqio.TaskRegistry.add(
+#     "klue_sts",
+#     seqio.TfdsDataSource(tfds_name="klue/sts:1.0.0"),
+#     preprocessors=[
+#         functools.partial(
+#             seqio.preprocessors.rekey, 
+#             key_map={
+#                 "id": "guid",
+#                 "sentence1": "sentence1",
+#                 "sentence2": "sentence2",
+#                 "label": "label",
+#             }),
+#         functools.partial(
+#             base_preproc_for_regression,
+#             benchmark_name='klue_sts',
+#             input_keys=['sentence1', 'sentence2'],
+#             is_string_tgt=False,
+#             with_feature_key=True
+#         ),
+#         seqio.preprocessors.tokenize, 
+#         seqio.preprocessors.append_eos
+#     ],
+#     output_features=CLASSIFICATION_OUTPUT_FEATURES,
+# )
+
+
+# ============ KLUE RE: Generative ============
+seqio.TaskRegistry.add(
+    "klue_re_gen",
+    seqio.TfdsDataSource(tfds_name="klue/re:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "sentence": "sentence",
+                "subject_entity": "subject_entity",
+                "object_entity": "object_entity",
+                "label": "label",
+            }),
+        functools.partial(
+            re_preproc_for_classification,
+            benchmark_name='klue_re',
+            label_names=KLUE_META['re_relations']
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=functools.partial(
+            string_label_to_class_id,
+            label_classes=KLUE_META['re_relations'],
+        ),
+    metric_fns=[metrics.accuracy],
+)
+
+# ============ KLUE RE: Classifier ============
+# seqio.TaskRegistry.add(
+#     "klue_re",
+#     seqio.TfdsDataSource(tfds_name="klue/re:1.0.0"),
+#     preprocessors=[
+#         functools.partial(
+#             seqio.preprocessors.rekey, 
+#             key_map={
+#                 "id": "guid",
+#                 "sentence": "sentence",
+#                 "subject_entity": "subject_entity",
+#                 "object_entity": "object_entity",
+#                 "label": "label",
+#             }),
+#         functools.partial(
+#             re_preproc_for_classification,
+#             benchmark_name='klue_re',
+#             label_names=None
+#         ),
+#         seqio.preprocessors.tokenize, 
+#         seqio.preprocessors.append_eos
+#     ],
+#     output_features=CLASSIFICATION_OUTPUT_FEATURES,
+# )
+
+# ============ KLUE MRC: Generative ============
+seqio.TaskRegistry.add(
+    "klue_mrc_gen",
+    seqio.TfdsDataSource(tfds_name="klue/mrc:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "context": "context",
+                "question": "question",
+                "answers": "answers",
+                "is_impossible": "is_impossible",
+            }),
+        functools.partial(
+            preprocess_quad,
+            benchmark_name='klue_mrc',
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=t5.data.postprocessors.qa,
+    metric_fns=[metrics.squad],
+)
+
+# ============ KLUE MRC: Generative - Context free ============
+seqio.TaskRegistry.add(
+    "klue_mrc_gen_context_free",
+    seqio.TfdsDataSource(tfds_name="klue/mrc:1.0.0"),
+    preprocessors=[
+        functools.partial(
+            seqio.preprocessors.rekey, 
+            key_map={
+                "id": "guid",
+                "context": "context",
+                "question": "question",
+                "answers": "answers",
+                "is_impossible": "is_impossible",
+            }),
+        functools.partial(
+            preprocess_quad,
+            benchmark_name='klue_mrc',
+            include_context=False
+        ),
+        seqio.preprocessors.tokenize, 
+        seqio.preprocessors.append_eos
+    ],
+    output_features=GENERATIVE_OUTPUT_FEATURES,
+    postprocess_fn=t5.data.postprocessors.qa,
+    metric_fns=[metrics.squad],
+)

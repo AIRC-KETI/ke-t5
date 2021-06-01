@@ -1,6 +1,7 @@
 import functools
 import collections
 
+import seqio
 import tensorflow as tf
 from t5.data import preprocessors
 from t5.data import postprocessors
@@ -351,3 +352,330 @@ def _ted_multi_translate_preprocess(dataset, source_language, target_language):
         functools.partial(_process, source_language=source_language, target_language=target_language), num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     return dataset
+
+
+
+_KLUE_TC_CLASSES = [
+    '정치',  # politics
+    '경제',  # economy
+    '사회',  # society
+    '생활문화',  # culture
+    '세계',  # world
+    'IT과학',  # IT/science
+    '스포츠',  # sports
+    '해당없음'  # OOD(out-of-distribution)
+]
+
+_KLUE_NLI_CLASSES = [
+    'entailment',
+    'contradiction',
+    'neutral'
+]
+
+_KLUE_NER_TAGS = [
+    'PS',  # person
+    'LC',  # location
+    'OG',  # organization
+    'DT',  # date
+    'TI',  # time
+    'QT'  # quantity
+]
+
+_KLUE_NER_IOB2_TAGS = [
+    'O',
+    'B-PS',
+    'I-PS',
+    'B-LC',
+    'I-LC',
+    'B-OG',
+    'I-OG',
+    'B-DT',
+    'I-DT',
+    'B-TI',
+    'I-TI',
+    'B-QT',
+    'I-QT',
+]
+
+_KLUE_RE_RELATIONS = [
+    "no_relation",
+    "org:dissolved",
+    "org:founded",
+    "org:place_of_headquarters",
+    "org:alternate_names",
+    "org:member_of",
+    "org:members",
+    "org:political/religious_affiliation",
+    "org:product",
+    "org:founded_by",
+    "org:top_members/employees",
+    "org:number_of_employees/members",
+    "per:date_of_birth",
+    "per:date_of_death",
+    "per:place_of_birth",
+    "per:place_of_death",
+    "per:place_of_residence",
+    "per:origin",
+    "per:employee_of",
+    "per:schools_attended",
+    "per:alternate_names",
+    "per:parents",
+    "per:children",
+    "per:siblings",
+    "per:spouse",
+    "per:other_family",
+    "per:colleagues",
+    "per:product",
+    "per:religion",
+    "per:title"
+]
+
+_KLUE_RE_ENTITY_TYPE = [
+    "PER",
+    "ORG",
+    "POH",
+    "DAT",
+    "LOC",
+    "NOH"
+]
+
+_KLUE_DP_SYNTAX = [
+    "NP",  # Noun Phrase
+    "VP",  # Verb Phrase
+    "AP",  # Adverb Phrase
+    "VNP",  # Copula Phrase
+    "DP",  # Adnoun Phrase
+    "IP",  # Interjection Phrase
+    "X",  # Pseudo Phrase
+    "L",  # Left Parenthesis and Quotation Mark
+    "R"  # Right Parenthesis and Quotation Mark
+]
+_KLUE_DP_FUNC = [
+    "SBJ",  # Subject
+    "OBJ",  # Object
+    "MOD",  # Noun Modifier
+    "AJT",  # Predicate Modifier
+    "CMP",  # Complement
+    "CNJ",  # Conjunction
+]
+
+_KLUE_DP_DEPREL_TAGS = [
+    "NP",
+    "NP_AJT",
+    "VP",
+    "NP_SBJ",
+    "VP_MOD",
+    "NP_OBJ",
+    "AP",
+    "NP_CNJ",
+    "NP_MOD",
+    "VNP",
+    "DP",
+    "VP_AJT",
+    "VNP_MOD",
+    "NP_CMP",
+    "VP_SBJ",
+    "VP_CMP",
+    "VP_OBJ",
+    "VNP_CMP",
+    "AP_MOD",
+    "X_AJT",
+    "VNP_AJT",
+    "VP_CNJ",
+    "IP",
+    "X",
+    "VNP_OBJ",
+    "X_SBJ",
+    "X_OBJ",
+    "VNP_SBJ",
+    "L",
+    "AP_AJT",
+    "X_CMP",
+    "X_CNJ",
+    "X_MOD",
+    "AP_CMP",
+    "R",
+    "VNP_CNJ",
+    "AP_SBJ",
+    "NP_SVJ"
+]
+
+KLUE_META={
+    'tc_classes': _KLUE_TC_CLASSES,
+    'nli_classes': _KLUE_NLI_CLASSES,
+    'ner_tags': _KLUE_NER_TAGS,
+    'ner_iob2_tags': _KLUE_NER_IOB2_TAGS,
+    're_relations': _KLUE_RE_RELATIONS,
+    're_entity_type': _KLUE_RE_ENTITY_TYPE,
+    'dp_deprels': _KLUE_DP_DEPREL_TAGS,
+    'dp_syntax': _KLUE_DP_SYNTAX,
+    'dp_func': _KLUE_DP_FUNC
+}
+
+@seqio.map_over_dataset
+def base_preproc_for_classification(x, benchmark_name, input_keys, label_names=None, no_label_idx=0, with_feature_key=True):
+    strs_to_join = []
+    for key in input_keys:
+        if with_feature_key:
+            strs_to_join.append('{}:'.format(key))
+        strs_to_join.append(x[key])
+
+    ex = {}
+
+    if label_names is not None:
+        # put the name of benchmark if the model is generative
+        strs_to_join.insert(0, benchmark_name)
+        ex['targets'] = tf.cond(
+            # When no label is provided (label == -1), use "<unk>"
+            tf.equal(x['label'], -1),
+            lambda: tf.constant('<unk>'),
+            # Otherwise grab the label text from label_names
+            lambda: tf.gather(label_names, x['label']),
+        )
+    else:
+        ex['targets'] = tf.cond(
+            # When no label is provided (label == -1), use no_label_idx
+            tf.equal(x['label'], -1),
+            lambda: tf.constant(no_label_idx, tf.int32),
+            # Otherwise set the label
+            lambda: x['label'],
+        )
+
+    joined = tf.strings.join(strs_to_join, separator=' ')
+    ex['inputs'] = joined
+    ex['id'] = x['id']
+
+    return ex
+
+
+@seqio.map_over_dataset
+def base_preproc_for_regression(x, benchmark_name, input_keys, is_string_tgt=True, with_feature_key=True):
+    strs_to_join = []
+    for key in input_keys:
+        if with_feature_key:
+            strs_to_join.append('{}:'.format(key))
+        strs_to_join.append(x[key])
+
+    ex = {}
+
+    if is_string_tgt:
+        # put the name of benchmark if the model is generative
+        strs_to_join.insert(0, benchmark_name)
+        ex['targets'] = tf.as_string(tf.round(x['label'] * 5) / 5, precision=1)
+    else:
+        ex['targets'] = x['label']
+
+    joined = tf.strings.join(strs_to_join, separator=' ')
+    ex['inputs'] = joined
+    ex['id'] = x['id']
+
+    return ex
+
+
+@seqio.map_over_dataset
+def re_preproc_for_classification(x, benchmark_name, label_names=None, no_label_idx=0, with_feature_key=True):
+    # mark span using start index of the entity
+    def _mark_span(text, span_str, span_idx, mark):
+        pattern_tmpl = r'^((?:[\S\s]){N})(W)'
+        pattern = tf.strings.regex_replace(pattern_tmpl, 'N',
+                                           tf.as_string(span_idx))
+        pattern = tf.strings.regex_replace(pattern, 'W', span_str)
+        return tf.strings.regex_replace(text, pattern, r'\1{0}\2{0}'.format(mark))
+
+    # '*' for subejct entity '#' for object entity.
+
+    text = x["sentence"]
+    text = _mark_span(text, x['subject_entity']['word'],
+                      x['subject_entity']['start_idx'], '*')
+    # Compensate for 2 added "words" added in previous step.
+    span2_index = x['object_entity']['start_idx'] + 2 * tf.cast(
+        x['subject_entity']['start_idx'] < x['object_entity']['start_idx'], tf.int32)
+    text = _mark_span(text, x['object_entity']['word'], span2_index, '#')
+
+    strs_to_join = []
+    if with_feature_key:
+        strs_to_join.append('{}:'.format('text'))
+    strs_to_join.append(text)
+
+    ex = {}
+
+    if label_names is not None:
+        # put the name of benchmark if the model is generative
+        strs_to_join.insert(0, benchmark_name)
+        ex['targets'] = tf.cond(
+            # When no label is provided (label == -1), use "<unk>"
+            tf.equal(x['label'], -1),
+            lambda: tf.constant('<unk>'),
+            # Otherwise grab the label text from label_names
+            lambda: tf.gather(label_names, x['label']),
+        )
+    else:
+        ex['targets'] = tf.cond(
+            # When no label is provided (label == -1), use no_label_idx
+            tf.equal(x['label'], -1),
+            lambda: tf.constant(no_label_idx, tf.int32),
+            # Otherwise set the label
+            lambda: x['label'],
+        )
+
+    joined = tf.strings.join(strs_to_join, separator=' ')
+    ex['inputs'] = joined
+    ex['id'] = x['id']
+
+    return ex
+
+
+@seqio.map_over_dataset
+def preprocess_quad(x, benchmark_name, include_context=True, impossible_answer_text='impossible'):
+    a = _pad_punctuation_general(x['answers']['text'])
+    q = _pad_punctuation_general(x['question'])
+    c = _pad_punctuation_general(x['context'])
+
+    strs_to_join = []
+    if include_context:
+        strs_to_join.extend(['question:', q, 'context:', c])
+    else:
+        strs_to_join.extend(['trivia question:', q])
+
+    strs_to_join.insert(0, benchmark_name)
+    inputs = _string_join(strs_to_join)
+
+    if 'is_impossible' in x:
+        if x['is_impossible']:
+            label = tf.constant(impossible_answer_text)
+        else:
+            label = a[0]
+    else:
+        label = a[0]
+
+    return {
+        'inputs': inputs,
+        'targets': label,
+        'id': x['id'],
+        'context': c,
+        'question': q,
+        'answers': a
+    }
+
+def tokenize_with_offsets(
+        dataset: tf.data.Dataset,
+        output_features: seqio.preprocessors.OutputFeaturesType,
+        copy_pretokenized: bool = True,
+    ) -> tf.data.Dataset:
+
+    def _tokenize(features):
+        ret = {}
+        for k, v in features.items():
+            if k in output_features:
+                if copy_pretokenized:
+                    ret[f'{k}_pretokenized'] = v
+                vocab = output_features[k].vocabulary
+                (tokens, start_offsets, end_offsets) = vocab.tf_tokenizer.tokenize_with_offsets(v)
+                v = tokens
+                ret[f'{k}_start_offsets'] = start_offsets
+                ret[f'{k}_end_offsets'] = end_offsets
+            ret[k] = v
+        return ret
+
+    return dataset.map(
+        _tokenize, num_parallel_calls=tf.data.experimental.AUTOTUNE)
