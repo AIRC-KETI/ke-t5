@@ -8,6 +8,10 @@ Vocabulary는 64,000개의 sub-word token으로 이루어져 있으며, Google�
 
 <br>
 
+## KE-T5 Downstreams
+
+Pytorch와 Huggingface transformers를 사용하시는 분들이 Downstream task들을 비교적 쉽게 학습시킬 수 있는 [KE-T5 Downstreams](https://github.com/AIRC-KETI/ke-t5-downstreams)가 공개되었습니다. NER, Summarization, Sequence Classification등 여러 task를 학습시킬 수 있습니다.
+
 ## Fine-tuning
 
 KE-T5를 이용하여 Downstream task를 학습하기 위해서는 먼저 pre-trained model을 다운 받아야 합니다. [pre-trained models](#pretrained-models)에서 다운 받으실 수 있습니다
