@@ -215,135 +215,65 @@ model = T5ForConditionalGeneration.from_pretrained(model_name)
             <th>Size</th>
             <th>steps</th>
             <th>Download URL(Tensorflow)</th>
-            <th>Download URL(Pytorch-Huggingface)</th>
             <th>Huggingface Transformers</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td rowspan=8>ke</td>
-            <td rowspan=2>small</td>
-            <td> 1M</td>
-            <td>  <a href='https://drive.google.com/file/d/1RPq7zZWH0JfkA5Qq79KxEHgQ1-OmhaKD/view?usp=sharing'> Download </a>   </td>
-            <td> <a href='https://drive.google.com/file/d/1H9xI3Yh-xM0LwxeMF_cblFrNlw1MBpxM/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=3>ke</td>
+            <td rowspan=1>small</td>
             <td> 5.5M </td>
-            <td> <a href='https://drive.google.com/file/d/1JSPDHZ7gDg3z2kAVG9i7DsEW_rEP7kuS/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1YPk_wQozsMmXl0iL6TUKsdjxcfoUdDQF/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1VtyD6i7lJRnrQVYN_y_pZMg7pFUsDrmn/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-small </td>
         </tr>
         <tr>
-            <td rowspan=4>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1bkHRcf7gsEUbE0LeayBkxfE2o17wGn76/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/12aKUY51rSDxBgPLCnL6GKzDnzzQgTxE7/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td> 1M </td>
-            <td> <a href='https://drive.google.com/file/d/1DwYaczTao6f9tveimbXp9T7BwIYfDPtu/view?usp=sharing'> Download </a> </td>
-            <td> <a href='https://drive.google.com/file/d/1NH_0qLap_1dq4mXCpWE1Yf6cnLtODXpF/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td> 1.5M </td>
-            <td> <a href='https://drive.google.com/file/d/1IvTU7DxRBtUFlrc0RmgR7pypqIHQ21Qr/view?usp=sharing'> Download </a> </td>
-            <td> <a href='https://drive.google.com/file/d/1QwBk5IG_thl8fAqgJCzb1nJdtWTYz9cx/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=1>base</td>
             <td> 2.2M </td>
-            <td> <a href='https://drive.google.com/file/d/1lVFyX9eAUVa-G4bZvUMQhdzZuzy-Ph39/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1KeOAEdZZfkh_9fEF5Vw2yoQWm5uAOzqB/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1niTeiy7pzrOB20u8oq0az-A9gUpKP_Vo/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-base </td>
         </tr>
         <tr>
-            <td rowspan=2>large</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1lCoYijBQx3fh0gj1rKzvjpIU-To-SasQ/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1JfR8uDiCZwAReWwYbLI0BIaXATQuimU-/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=1>large</td>
             <td> 1.7M </td>
-            <td> <a href='https://drive.google.com/file/d/1Akav9Y9aXIgHRpNBINPB43gESSd09n31/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1rcV8ln2l9IqGzMby4C9MRg9yXn_JIJbf/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1Iu4XgLNc99wPkl8KgYD3JIOLBWXDzveo/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-large </td>
         </tr>
         <tr>
-            <td rowspan=6>ke.newslike</td>
-            <td rowspan=2>small</td>
-            <td> 1M</td>
-            <td>  <a href='https://drive.google.com/file/d/1OWvbRlTctQtrzk5iQpUJMprTWsObqtgD/view?usp=sharing'> Download </a>   </td>
-            <td> <a href='https://drive.google.com/file/d/1l39KhDO4RAupkGilPUfjBjzuon22P6gY/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=3>ke.newslike</td>
+            <td rowspan=1>small</td>
             <td> 5.4M </td>
-            <td> <a href='https://drive.google.com/file/d/1FrtDBrW9N8JA2wLHOn21S0FMW-uovjB8/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1Dps4e8k_BEZBt4P5yDlMGQ52xZjymwk7/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1_q_vInAVxgKbUbVHuc_DXIEefJ8eoVTY/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-small-newslike </td>
         </tr>
         <tr>
-            <td rowspan=2>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1IqBOqNWYLkyPep84Aw7xBOL4X9W1x0bY/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/12FFTw2B3aMluDBvfAYUmN7_1Vxs-h54W/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=1>base</td>
             <td> 2.2M </td>
-            <td> <a href='https://drive.google.com/file/d/1wjWjMawH5PERPISp9FXjB_V6baDweJFK/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1HynlOYTNFHZwdLSdEd4-NXsR4BNrn3iz/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1dVibwqYmoMQElRUR53vIaKWSJ3rpqUDI/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-base-newslike </td>
         </tr>
         <tr>
-            <td rowspan=2>large</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1_R9cQjUJkIC6GVLy1hOTUJQyldJTxlWo/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1-cXx5903KV8R3k0GkEmKZrz31frqgpXR/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=1>large</td>
             <td> 1.7M </td>
-            <td> <a href='https://drive.google.com/file/d/1UcTWEYe8ug9BbKd2Bb6RtUQZ_aq7rUEO/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1o7BsYnv2mHZFFfuxiWJ4NZYGWvh--Zgq/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1AstaSL2NKYZJ1fGFmgSyRxnAxS3aAbyd/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-large-newslike </td>
         </tr>
         <tr>
-            <td rowspan=7>ko</td>
-            <td rowspan=2>small</td>
-            <td> 1M</td>
-            <td>  <a href='https://drive.google.com/file/d/1V3usXySS7JUnFSACvvR8kN-XBN5C6cWF/view?usp=sharing'> Download </a>   </td>
-            <td> <a href='https://drive.google.com/file/d/1QTiteepkcBclnKioeaqnWmgGarMuSaKe/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=3>ko</td>
+            <td rowspan=1>small</td>
             <td> 5.3M </td>
-            <td> <a href='https://drive.google.com/file/d/1Y2SDASnzWg6Gj6C8Y236hEQ-yQs9-M9H/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1yItUwlQBdl3ENm2bpZx9rtOy9dgB0trg/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1cFR4NHXa5mJEwtPN8OPslbVL18BLZ30F/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-small-ko </td>
         </tr>
         <tr>
-            <td rowspan=2>base</td>
-            <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1LCvR_rC_cmouTy1720z48BC9Gkmg3EyK/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1gvZWEwziNUVrRugJ9AkzkaRqi4fsMhKW/view?usp=sharing'> Download </a> </td>
-            <td> </td>
-        </tr>
-        <tr>
+            <td rowspan=1>base</td>
             <td> 2.3M </td>
-            <td> <a href='https://drive.google.com/file/d/1xt0cUxtKCeyUbVZopZ-XZu6vwnf_zIkp/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1ZnXq98VGtkEBdMXBRY69fx8giwShJVWR/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/1nSVTCfDeoQN2M1fPXxPxRZ-_boYjSTqR/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-base-ko </td>
         </tr>
         <tr>
             <td rowspan=1>large</td>
             <td> 1M </td>
-            <td> <a href='https://drive.google.com/file/d/1C0_6sD1YfhHQTfTIPuOtCbB9O74WNOL8/view?usp=sharing'> Download </a>  </td>
-            <td> <a href='https://drive.google.com/file/d/1BfN4_9mFdomvBAJT3gv8Z-K5DnGZjhlp/view?usp=sharing'> Download </a> </td>
+            <td> <a href='https://drive.google.com/file/d/12cKWNExMtOtmUBqO745YsoAou1eZr2Yz/view?usp=sharing'> Download </a>  </td>
             <td> KETI-AIR/ke-t5-large-ko </td>
         </tr>
     </tbody>
@@ -369,60 +299,60 @@ model = T5ForConditionalGeneration.from_pretrained(model_name)
             <td rowspan=3>ke</td>
             <td>small</td>
             <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1Eyew2FpBDLXceP4sCeVovAb_D1ofjuXM/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1TFcfr-10_Zhppg5mWTXkBKSLi-RPaKbC/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1fC33A4WiNZOpjJ1mL7WE0p2ZSg_Xxw0i/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1qZM7jcpeaao6NOo88aLgOYRi5lfxIZcZ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1mnxToYnIfDFPxd4fmEuBMLRTBLR2YrrT/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1IN2KSPh_Ul7iNZt57dF7odcbQ8VREsGl/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1rqH5Vp3C1AOmH_sqBaqVjQ3MWpineWS4/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1fURARZ8kqwtOdVyRhgzDdCcSxxsqa46c/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1A_ce8i1E2AEFdIV0DzhRwSrNGwSey9Ny/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1lKi2-UTj2GVWih44mrGv7PWj1O-cNxDw/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1j8QmAkShctCSEPOodEJ3R88uzVV0L5vw/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1NVwzcRSv3OeA4LLRSuZ9rJifmkRb08KJ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/11qWY8vWaDaU7JXQVInrVVxZjWXPRPrMV/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1OQVM6DJQNlpOl41YI711T4OcrI7WRKn2/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1SurwIHi0G4TkkTyBuWGqDc5gXQ_UVq4t/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/14LvoUfxDaVaY9sp-SVdK7gPSXi_4HJ_9/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1yVU1B5DA7Vzl_XRXvbKXiNSf0LWHjlbQ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1UoNhljvHny2bsA8xYy317EmTllN4y2J5/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td rowspan=3>ke.newslike</td>
             <td>small</td>
             <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1RWKefyXecgYO1_T-XqV_6ddbV2iXp6n0/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1lw4a4d3oTHrklvIH7PP7dLFxWJPkC2yl/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1YZyq4eVM_yduSrlpZhzkQ9wwtk-iVn85/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1gzjcbtNhrkDuMx75dL3XED0Iy0otipUD/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1PoQ8LgXJDQ4Bxud_ed7SeUZsLNtdzgy6/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1Qovz2iv4hnM7mNC16X3TxRuHj4ILs_rf/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1wwOgEonOzR9hZUIQvyWL0YXy6k6Utepk/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1tmeF09ezh3Qsco0WtBP25f4Q89p30Nz8/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1iK9HLR6TXKGwaFqFhzDaVKjJVzaDmxkx/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1VK2baHMcUki4Vlk1_Uwg0S1cauNTbf-o/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1EQ4giXlMsOT6WW3wx8TzctSrJDz3gtTi/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1QHNQdv7XxaBhbeXdq2SMUq4Q6jkdVfXg/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>large</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/1A-31M-UELtDizmHjfpGdjgEqSMCYDiut/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1oURcluLJ778N_rD8mnLh1oLcZqQBlhLZ/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1PIRrmQEg2W_OUKdwWu2T5RKq30xbgcba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1V_zedd21fEx1omIObfBcIjbqHoSY6zK3/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1_HovEuEr-fyp7J_2O5SaIS0Oo0FyhEFq/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1QLO4yjQVzo2VNFYiKPWZ2uifYa9MXEh-/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td rowspan=3>ko</td>
             <td>small</td>
             <td> 1M </td>
-            <td>  <a href='https://drive.google.com/file/d/1Vx3XY6ORTtst_eVhQ3rSdHO6mozwYICz/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1Jb7tVmfhoKQXx58Oh3rZE9On5lfKgEEu/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/11trFdNAsavnLm7R3I9PTuulWjXakQ4uB/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/16PptjLp3QKM2i39kPZnv1hyTwoL1FjVh/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1hYwyOr1vKRqlBx5uDMvGxJMmHrHd4uIK/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1gA70apMtEJX2svtSrhKcPwPDEWKu68i6/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
         <tr>
             <td>base</td>
             <td> 600K </td>
-            <td>  <a href='https://drive.google.com/file/d/14GymkunvDhDtnCJPFHHGdtv-PadRQPPf/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1e9TR9baJXt4vuj4ieN2rPgbjfqiQVXuv/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
-            <td>  <a href='https://drive.google.com/file/d/1t4wsyYBqtB7wrN_D4oDRfIXLctJNmEba/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
+            <td>  <a href='https://drive.google.com/file/d/1w2pCZnBJn_h5sXAUrCxhaNFeZzNNPmXT/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_nikl_summary_mixture_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1SGUvuFZSURVCcb8owDTrJAlHl3HXZIyC/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_en_qa_equal -->
+            <td>  <a href='https://drive.google.com/file/d/1CDqrXBsCd-frvOOuKkZxrcbT1CGu4DRy/view?usp=sharing'> Download </a>  </td> <!-- ke_t5_ko_translation_proportional -->
         </tr>
     </tbody>
 </table>
