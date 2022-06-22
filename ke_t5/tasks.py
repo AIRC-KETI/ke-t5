@@ -32,6 +32,31 @@ DEFAULT_OUTPUT_FEATURES = {
 # ==================================== KE pre-training ======================================
 
 t5.data.TaskRegistry.add(
+    "keti_en_v100_span_corruption",
+    t5.data.TfdsTask,
+    tfds_name="keti/en:1.0.0",
+    text_preprocessor=functools.partial(
+        t5.data.preprocessors.rekey, key_map={"inputs": None, "targets": "text"}),
+    token_preprocessor=t5.data.preprocessors.span_corruption,
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+t5.data.TaskRegistry.add(
+    "keti_ko_v100_span_corruption",
+    t5.data.TfdsTask,
+    tfds_name="keti/ko:1.0.0",
+    text_preprocessor=functools.partial(
+        t5.data.preprocessors.rekey, key_map={"inputs": None, "targets": "text"}),
+    token_preprocessor=t5.data.preprocessors.span_corruption,
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+t5.data.MixtureRegistry.add(
+    "keti_en_v100_span_corruption_mixture_equal",
+    ["keti_en_v100_span_corruption", "keti_ko_v100_span_corruption"],
+    default_rate=1.0)
+
+t5.data.TaskRegistry.add(
     "ke.ke_v100_span_corruption",
     t5.data.TfdsTask,
     tfds_name="ke_dataset/ke:1.0.0",
