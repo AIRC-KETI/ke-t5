@@ -52,7 +52,7 @@ t5.data.TaskRegistry.add(
     metric_fns=[])
 
 t5.data.MixtureRegistry.add(
-    "keti_en_v100_span_corruption_mixture_equal",
+    "keti_enko_v100_span_corruption_mixture_equal",
     ["keti_en_v100_span_corruption", "keti_ko_v100_span_corruption"],
     default_rate=1.0)
 
