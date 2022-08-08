@@ -1,3 +1,14 @@
+# data
+examples/outputs
+examples/training_generator.py
+examples/show_samples.py
+examples/run_test2.sh
+examples/.lock
+examples/run_test.sh
+examples/run_training.sh
+examples/data
+examples/huggingface_datasets
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
