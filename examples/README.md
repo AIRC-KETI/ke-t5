@@ -84,6 +84,8 @@ accelerate launch run_summarization_no_trainer.py \
 }
 ```
 
+## Extractive Summarization 학습
+
 ```bash
 epochs=10
 scheduler_type=constant
@@ -125,6 +127,8 @@ accelerate launch run_summarization_no_trainer.py \
 'preds': '문재인 대통령은 2일 “새해에는 더욱 ‘확실한 변화’를 만들어내겠다”며 “권력기관 개혁과 공정사회 개혁이 그 시작”이라고 말했다.\n문 대통령은 이날 오전 11시 서울 대한상공회의소에서 열린 신년인사회의 인사말에서 “어떠한 권력기관도 국민 위에 존재할 수 없다”며 이렇게 밝혔다.\n문 대통령은 이날 오전 11시 서울 대한상공회의소에서 열린 신년인사회의 인사말에서 “어떠한 권력기관도 국민 위에  존재할 수 없다”며 이렇게 밝혔다.', 
 'labels': '문 대통령은 이날 오전 11시 서울 대한상공회의소에서 열린 신년인사회의 인사말에서 “어떠한 권 력기관도 국민 위에 존재할 수 없다”며 이렇게 밝혔다.\n문 대통령의 발언은 연말 고위공직자범죄수사처 관련 법안 통과, 이날 오전 추미애 법무부 장관의 임명 재가 등으로 이어지는 검찰개혁 속도전의 연장선으로 해석된다.'}
 ```
+
+## Translation 학습 (ko2en)
 
 
 ```bash
@@ -171,6 +175,8 @@ accelerate launch run_translation_no_trainer.py \
 {'inputs': 'translate_ko2en: 더 부드럽고, 밝고, 고른 톤의 피부를 선사합니다.', 'preds': 'Provides smoother, brighter, and even skin.', 'labels': ['Provides smoother, brighter, and even-toned skin.']}
 {'inputs': 'translate_ko2en: 표면의 불순물을 부드럽게 제거하는 천연 유래 과립 성분이 함유되어 있습니다.', 'preds': 'Contains naturally derived granual ingredients that gently remove surface impurities.', 'labels': ['Contains naturally derived granular ingredients that gently remove surface impurities.']}
 ```
+
+## Translation 학습 (en2ko)
 
 ```bash
 epochs=10
