@@ -12,7 +12,7 @@ AI Hub에서 데이터를 다운로드합니다.
 
 [요약문 및 레포트 생성데이터](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=582)
 
-[일상생활 및 구어체 한-영 번역 병렬 말뭉치 데이터](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=582)
+[일상생활 및 구어체 한-영 번역 병렬 말뭉치 데이터](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=71265)
 
 여기서 다운받은 데이터들이 위치해 있는 폴더가 `--hf_data_dir`의 위치가 됩니다.
 `--hf_cache_dir`은 데이터 cache가 저장될 위치입니다.
