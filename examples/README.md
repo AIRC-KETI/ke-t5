@@ -162,6 +162,7 @@ accelerate launch run_translation_no_trainer.py \
 | Model | bleu  | 
 | -------------| ------------- | 
 | ke-t5-small| 48.869 | 
+| ke-t5-small (3 epochs)| 96.274 | 
 
 
 ### Qualitive Performance
@@ -210,6 +211,7 @@ accelerate launch run_translation_no_trainer.py \
 | Model | bleu  | 
 | -------------| ------------- | 
 | ke-t5-small| 32.142 | 
+| ke-t5-small (3 epochs)| 93.162 | 
 
 
 ### Qualitive Performance
