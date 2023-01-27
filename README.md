@@ -2086,5 +2086,4 @@ KE-T5의 ke, ko 사전학습에 국립국어원 **모두의 말뭉치**가 사�
 
 ## Acknowledgement
 
-
-This work was partly supported by  National IT Industry Promotion Agency (NIPA) grant funded by the Korea government(MSIT) (S0316-21-1002, Development of artificial intelligence based empathy service technology for emotional stability).
+본 연구는 정부(과학기술정보통신부)의 재원으로 지원을 받아 수행된 연구입니다. (정보통신기획평가원, 2022-0-00320), (정보통신기획평가원, 2022-0-00608), (정보통신기획평가원, 2021-0-00537), (정보통신산업진흥원, S0316-21-1002)
