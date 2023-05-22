@@ -11,7 +11,7 @@ Vocabulary는 64,000개의 sub-word token으로 이루어져 있으며, Google�
 ## Long-KE-T5 Downstreams
 
 기존 KE-T5보다 많은 양의 토큰을 입력으로 받고 출력으로 생성 가능한 [Long KE-T5](https://github.com/AIRC-KETI/long-ke-t5)가 공개되었습니다. Long KE-T5는 입력 기준 4096 토큰, 출력 기준 1024 토큰으로 학습되었습니다.
-또한 Long KE-T5를 활용한 간단한 생성 모델(Downstream Tasks)
+또한 Long KE-T5를 활용한 간단한 생성 모델(Downstream Tasks) 몇 개가 공개 되었으며 지속적으로 추가 모델들이 공개될 예정입니다.
 
 ## KE-T5 Downstreams
 
